@@ -1,1 +1,298 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sitio académico y docente de Viviana Torres Águila. Bioquímica, fisiología, investigación y recursos educativos.">
+  <title>Viviana Torres Águila | Bioquímica · Fisiología · Docencia</title>
+  <style>
+    :root{
+      --ink:#17252c;
+      --muted:#64727a;
+      --accent:#1f6177;
+      --accent2:#8bb7c5;
+      --soft:#edf5f7;
+      --paper:#ffffff;
+      --line:#d8e4e8;
+      --bg:#f4f8f9;
+      --shadow:0 18px 45px rgba(30,67,82,.10);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.65;
+    }
+    a{color:inherit}
+    .shell{width:min(1120px,calc(100% - 36px));margin:0 auto}
+    header{
+      position:sticky; top:0; z-index:20;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--line);
+    }
+    nav{
+      min-height:68px; display:flex; align-items:center; justify-content:space-between; gap:24px;
+    }
+    .brand{font-weight:800; letter-spacing:-.02em}
+    .navlinks{display:flex; gap:20px; flex-wrap:wrap; font-size:.94rem}
+    .navlinks a{text-decoration:none;color:var(--muted)}
+    .navlinks a:hover{color:var(--accent)}
+    .hero{
+      padding:88px 0 72px;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(139,183,197,.28), transparent 28%),
+        linear-gradient(180deg,#f9fcfd 0%,var(--bg) 100%);
+    }
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+    .eyebrow{
+      color:var(--accent);text-transform:uppercase;font-weight:800;letter-spacing:.13em;font-size:.82rem
+    }
+    h1{font-size:clamp(2.6rem,6vw,5rem);line-height:1.02;margin:.18em 0;letter-spacing:-.055em}
+    .lead{font-size:1.25rem;color:var(--muted);max-width:760px}
+    .hero-card{
+      background:var(--paper);border:1px solid var(--line);border-radius:24px;
+      padding:28px;box-shadow:var(--shadow)
+    }
+    .hero-card strong{display:block;color:var(--accent);margin-bottom:8px}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .btn{
+      display:inline-block;text-decoration:none;padding:12px 18px;border-radius:10px;font-weight:750
+    }
+    .btn-primary{background:var(--accent);color:white}
+    .btn-soft{background:var(--soft);color:var(--accent);border:1px solid #cfe0e5}
+    section{padding:72px 0}
+    section.alt{background:white;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .section-title{font-size:2rem;margin:0 0 10px;letter-spacing:-.03em}
+    .section-intro{color:var(--muted);max-width:800px;margin-bottom:32px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{
+      background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;
+      box-shadow:0 10px 28px rgba(24,55,70,.06)
+    }
+    .card h3{margin-top:0}
+    .tag{display:inline-block;font-size:.78rem;font-weight:800;color:var(--accent);background:var(--soft);
+      padding:5px 9px;border-radius:999px;margin-bottom:10px}
+    .lesson{
+      display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:start
+    }
+    audio{width:100%;margin:16px 0 4px}
+    .lesson-list{display:grid;gap:10px;margin-top:16px}
+    .lesson-item{
+      display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);
+      border-radius:12px;background:#fbfdfe
+    }
+    .num{
+      width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--soft);
+      color:var(--accent);font-weight:800;flex:0 0 auto
+    }
+    .muted{color:var(--muted)}
+    .research-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .contact{
+      background:linear-gradient(135deg,#173e4c,#245f73);
+      color:white;border-radius:24px;padding:34px
+    }
+    .contact p{color:#dce9ed}
+    footer{padding:30px 0 44px;color:var(--muted);font-size:.9rem}
+    @media(max-width:850px){
+      .hero-grid,.lesson,.research-grid,.grid-3{grid-template-columns:1fr}
+      .navlinks{display:none}
+      .hero{padding-top:58px}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="shell">
+    <nav>
+      <div class="brand">Viviana Torres Águila</div>
+      <div class="navlinks">
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#docencia">Docencia</a>
+        <a href="#metabolismo">Metabolismo en 4 minutos</a>
+        <a href="#investigacion">Investigación</a>
+        <a href="#vinculacion">Vinculación</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div>
+        <div class="eyebrow">Bioquímica · Fisiología · Investigación · Educación científica</div>
+        <h1>Comprender la lógica de la bioquímica.</h1>
+        <p class="lead">
+          Un espacio para compartir ciencia, docencia y recursos que ayuden a comprender el metabolismo
+          y otros procesos biológicos más allá de la memorización de vías y mecanismos.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#metabolismo">Explorar Metabolismo en 4 minutos</a>
+          <a class="btn btn-soft" href="#sobre-mi">Conocer mi trayectoria</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <strong>Viviana Torres Águila</strong>
+        <div>Bioquímica · PhD en Fisiología</div>
+        <p class="muted">
+          Más de dos décadas de experiencia en investigación científica y docencia universitaria,
+          con formación adicional en neurobiología y una trayectoria orientada a integrar ciencia,
+          enseñanza e innovación.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre-mi" class="alt">
+    <div class="shell">
+      <h2 class="section-title">Sobre mí</h2>
+      <p class="section-intro">
+        Soy bioquímica formada en Chile y doctora en Fisiología en Estados Unidos. Realicé formación
+        postdoctoral en neurobiología en la University of Alabama at Birmingham y en Stanford University.
+        Mi trayectoria ha combinado investigación, docencia universitaria, gestión científica e innovación educativa.
+      </p>
+      <div class="grid-3">
+        <div class="card">
+          <span class="tag">Investigación</span>
+          <h3>Neurobiología y bioquímica celular</h3>
+          <p>Estudio de trastornos neurodegenerativos, interacción y función de proteínas mediante herramientas de biología molecular, bioquímica y biología celular.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Docencia</span>
+          <h3>Enseñar para comprender</h3>
+          <p>Desarrollo de recursos y estrategias para que los estudiantes comprendan la lógica de la bioquímica y el metabolismo, en lugar de memorizar rutas aisladas.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Innovación</span>
+          <h3>Ciencia, gestión y educación</h3>
+          <p>Experiencia en dirección de infraestructura científica, proyectos docentes, comunicación científica y vinculación con comunidades educativas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="docencia">
+    <div class="shell">
+      <h2 class="section-title">Docencia y recursos</h2>
+      <p class="section-intro">
+        Recursos breves, visuales y conceptuales para apoyar el aprendizaje de bioquímica y metabolismo.
+      </p>
+      <div class="grid-3">
+        <div class="card"><h3>Microlecciones</h3><p>Audios breves organizados alrededor de una pregunta central.</p></div>
+        <div class="card"><h3>Presentaciones</h3><p>Material visual para acompañar cada microlección y facilitar el estudio.</p></div>
+        <div class="card"><h3>Infografías y recursos</h3><p>Materiales para conectar procesos moleculares con situaciones fisiológicas.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="metabolismo" class="alt">
+    <div class="shell">
+      <h2 class="section-title">Metabolismo en 4 minutos</h2>
+      <p class="section-intro">
+        Una pregunta, una idea y cuatro minutos para comprender nuestro metabolismo.
+      </p>
+
+      <div class="lesson">
+        <div class="card">
+          <span class="tag">Microlección 01</span>
+          <h3>¿Por qué existe el metabolismo?</h3>
+          <p>
+            ¿Por qué una célula necesita transformar continuamente materia y energía?
+            Esta primera microlección presenta el metabolismo como una red dinámica que sostiene la vida.
+          </p>
+          <audio controls preload="metadata">
+            <source src="assets/metabolismo_leccion1.mp3" type="audio/mpeg">
+            Tu navegador no puede reproducir este audio.
+          </audio>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="assets/metabolismo_leccion1.pptx" target="_blank" rel="noopener">Abrir PowerPoint</a>
+            <a class="btn btn-soft" href="assets/metabolismo_leccion1.pptx" download>Descargar PPT</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Temporada 1 · Fundamentos del metabolismo</h3>
+          <div class="lesson-list">
+            <div class="lesson-item"><div class="num">01</div><div><strong>¿Por qué existe el metabolismo?</strong><br><span class="muted">Disponible</span></div></div>
+            <div class="lesson-item"><div class="num">02</div><div><strong>Digestión y absorción de nutrientes</strong><br><span class="muted">Próximamente</span></div></div>
+            <div class="lesson-item"><div class="num">03</div><div><strong>Del intestino a los tejidos</strong><br><span class="muted">Próximamente</span></div></div>
+            <div class="lesson-item"><div class="num">04</div><div><strong>¿Qué hacemos con los nutrientes después de comer?</strong><br><span class="muted">Próximamente</span></div></div>
+            <div class="lesson-item"><div class="num">05</div><div><strong>El ayuno nocturno</strong><br><span class="muted">Próximamente</span></div></div>
+            <div class="lesson-item"><div class="num">06</div><div><strong>Cuando el ayuno continúa</strong><br><span class="muted">Próximamente</span></div></div>
+            <div class="lesson-item"><div class="num">07</div><div><strong>Ayuno prolongado e inanición</strong><br><span class="muted">Próximamente</span></div></div>
+            <div class="lesson-item"><div class="num">08</div><div><strong>De reposo a ejercicio</strong><br><span class="muted">Próximamente</span></div></div>
+            <div class="lesson-item"><div class="num">09</div><div><strong>Los 100 metros planos</strong><br><span class="muted">Próximamente</span></div></div>
+            <div class="lesson-item"><div class="num">10</div><div><strong>Una maratón</strong><br><span class="muted">Próximamente</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="investigacion">
+    <div class="shell">
+      <h2 class="section-title">Investigación</h2>
+      <p class="section-intro">
+        Intereses científicos centrados en bioquímica, fisiología, neurobiología y metabolismo.
+      </p>
+      <div class="research-grid">
+        <div class="card">
+          <h3>Neurodegeneración</h3>
+          <p>Interacciones y función de proteínas, mecanismos celulares y aproximaciones de biología molecular y celular.</p>
+        </div>
+        <div class="card">
+          <h3>Metabolismo energético</h3>
+          <p>Flexibilidad metabólica, selección de combustibles, regulación energética y aproximaciones integradoras desde la bioquímica y la fisiología.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="vinculacion" class="alt">
+    <div class="shell">
+      <h2 class="section-title">Vinculación y educación científica</h2>
+      <p class="section-intro">
+        Proyectos que conectan universidad, estudiantes y comunidades mediante recursos científicos comprensibles y actividades educativas.
+      </p>
+      <div class="card">
+        <h3>Ciencia que sale del aula</h3>
+        <p>
+          Desarrollo de iniciativas de comunicación científica, recursos educativos, proyectos de apoyo a la enseñanza
+          y actividades de vinculación con escuelas y comunidades.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="shell">
+      <div class="contact">
+        <h2 class="section-title">Contacto y perfiles académicos</h2>
+        <p>
+          Puedes contactarme por correo electrónico o conocer más sobre mi trayectoria,
+          publicaciones y contenidos de divulgación en los siguientes perfiles.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-soft" href="mailto:viviana.torres@gmail.com">Correo electrónico</a>
+          <a class="btn btn-soft" href="https://orcid.org/0000-0002-1220-7709" target="_blank" rel="noopener noreferrer">ORCID</a>
+          <a class="btn btn-soft" href="https://www.linkedin.com/in/viviana-torres-82076019/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="btn btn-soft" href="https://www.youtube.com/@vivitorresaguila" target="_blank" rel="noopener noreferrer">YouTube</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="shell">
+    © Viviana Torres Águila · Sitio académico y docente
+  </div>
+</footer>
+</body>
+</html>
