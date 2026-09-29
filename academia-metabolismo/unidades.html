@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Unidades | Academia de Metabolismo</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f8f7;
+            margin: 0;
+            color: #243238;
+        }
+
+        .contenedor {
+            text-align: center;
+            max-width: 980px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #1e6f8b;
+            font-size: 44px;
+        }
+
+        .subtitulo {
+            font-size: 21px;
+            color: #555;
+        }
+
+        .unidades {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .unidad {
+            display: block;
+            padding: 30px 15px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #243238;
+            font-size: 20px;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .unidad:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.10);
+        }
+
+        .alimentado {
+            background-color: #dcefe4;
+        }
+
+        .ayuno {
+            background-color: #f6ead5;
+        }
+
+        .ejercicio {
+            background-color: #dceaf5;
+        }
+
+        .casos {
+            background-color: #eadff4;
+        }
+
+        .herramientas-titulo {
+            margin: 42px 0 8px;
+            color: #1e6f8b;
+            font-size: 30px;
+        }
+
+        .herramientas {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 22px;
+        }
+
+        .herramienta {
+            display: block;
+            padding: 26px 18px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #243238;
+            font-size: 20px;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            background: linear-gradient(135deg,#edf5fa,#eef7f2);
+            border: 2px solid #d5e3df;
+        }
+
+        .herramienta:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.10);
+        }
+
+        .estado-unidad {
+            display: block;
+            margin-top: 8px;
+            font-size: 13px;
+            font-weight: normal;
+            opacity: 0.75;
+        }
+
+        .volver {
+            display: inline-block;
+            margin-top: 35px;
+            color: #1e6f8b;
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .unidades, .herramientas {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="contenedor">
+
+        <h1>🧬 Unidades de aprendizaje</h1>
+
+        <p class="subtitulo">
+            Selecciona un tema para comenzar a practicar.
+        </p>
+
+        <section class="unidades">
+
+            <a class="unidad alimentado" href="menu-alimentado.html">
+                🍽️ Estado alimentado
+                <span class="estado-unidad">Ruta de razonamiento, fundamentos e integración disponibles</span>
+            </a>
+
+            <a class="unidad ayuno" href="menu-ayuno.html">
+                🌙 Ayuno
+                <span class="estado-unidad">Fundamentos, integración, casos y paciente virtual disponibles</span>
+            </a>
+
+            <a class="unidad ejercicio" href="menu-ejercicio.html">
+                🏃 Ejercicio
+                <span class="estado-unidad">Mapa y red metabólica disponibles; módulos específicos en preparación</span>
+            </a>
+
+            <a class="unidad casos" href="menu-casos.html">
+                🧠 Casos integradores
+                <span class="estado-unidad">Herramientas para comparar estados; casos interactivos en preparación</span>
+            </a>
+
+        </section>
+
+        <h2 class="herramientas-titulo">🔬 Herramientas de exploración</h2>
+        <p class="subtitulo">Compara órganos, combustibles y flujos entre distintos estados fisiológicos.</p>
+
+        <section class="herramientas">
+            <a class="herramienta" href="atlas-metabolico.html">
+                🧍 Atlas Metabólico Humano
+                <span class="estado-unidad">Explora cada órgano en alimentado, ayuno y ejercicio</span>
+            </a>
+            <a class="herramienta" href="red-comunicacion-organos.html">
+                🔄 Red de comunicación entre órganos
+                <span class="estado-unidad">Sigue el flujo de combustibles y metabolitos</span>
+            </a>
+        </section>
+        <a class="volver" href="index.html">
+            ← Volver al inicio
+        </a>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ruta de razonamiento | Estado alimentado</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f3f7f6;margin:0;color:#243238}
+.contenedor{max-width:860px;margin:35px auto;padding:20px}
+.encabezado{text-align:center;margin-bottom:25px}
+.encabezado h1{color:#1e6f8b;font-size:38px;margin-bottom:8px}
+.encabezado p{color:#555;font-size:18px;line-height:1.5}
+.panel-superior{display:flex;gap:15px;margin-bottom:15px}
+.dato{background:#fff;border-radius:12px;padding:12px 18px;flex:1;text-align:center;border:1px solid #dce5e4}
+.dato strong{display:block;color:#1e6f8b;font-size:20px;margin-top:4px}
+.barra-contenedor{width:100%;height:14px;background:#dbe5e3;border-radius:20px;overflow:hidden;margin-bottom:22px}
+.barra{height:100%;width:12.5%;background:#2e8b57;transition:width .4s}
+.tarjeta{background:#fff;padding:30px;border-radius:18px;box-shadow:0 5px 18px rgba(0,0,0,.09)}
+.etiqueta{display:inline-block;background:#dceaf5;color:#1e5f80;padding:7px 13px;border-radius:20px;font-weight:bold;margin-bottom:15px}
+.escenario{background:#edf5fa;border-left:6px solid #1e6f8b;padding:16px;border-radius:10px;line-height:1.55;margin-bottom:20px}
+.pregunta{font-size:22px;line-height:1.45;margin-bottom:22px}
+.instruccion{color:#5e6b70;margin-top:-10px;margin-bottom:18px}
+.alternativa{display:block;background:#f7f9f9;border:2px solid #d9e2e3;border-radius:12px;padding:15px;margin:12px 0;cursor:pointer}
+.alternativa:hover{background:#eef5f3;border-color:#9dbdb5}
+.alternativa input{margin-right:10px}
+.botones{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.boton{background:#2e8b57;color:#fff;border:none;border-radius:12px;padding:14px 24px;font-size:17px;cursor:pointer;text-decoration:none;display:inline-block}
+.boton:hover{background:#247247}
+.boton-secundario{background:#1e6f8b}
+#retroalimentacion{display:none;margin-top:22px;padding:18px;border-radius:12px;line-height:1.55}
+.correcta{background:#e1f4e8;border-left:6px solid #2e8b57}
+.incorrecta{background:#fde8e8;border-left:6px solid #b64646}
+.resumen{display:grid;gap:12px;margin:22px 0}
+.resumen div{background:#f7f9f9;border-radius:12px;padding:15px;border-left:5px solid #1e6f8b}
+.resultado-final{text-align:center}
+.resultado-final h2{color:#1e6f8b;font-size:30px}
+.resultado-numero{font-size:42px;color:#2e8b57;font-weight:bold}
+.volver{display:inline-block;margin-top:25px;color:#1e6f8b;text-decoration:none}
+@media(max-width:600px){
+ .panel-superior{flex-direction:column}
+ .tarjeta{padding:22px}
+ .pregunta{font-size:20px}
+ .encabezado h1{font-size:31px}
+}
+</style>
+</head>
+<body>
+<main class="contenedor">
+<header class="encabezado">
+<h1>🧬 Ruta de razonamiento: Estado alimentado</h1>
+<p>Avanza paso a paso para comprender cómo el organismo distribuye, utiliza y almacena los nutrientes después de una comida mixta.</p>
+</header>
+
+<div class="escenario">
+<strong>Escenario:</strong> una persona acaba de consumir una comida mixta que contiene carbohidratos, proteínas y lípidos.
+</div>
+
+<section class="panel-superior">
+<div class="dato">Paso<strong id="numero-paso">1 de 8</strong></div>
+<div class="dato">Progreso<strong id="progreso-texto">12 %</strong></div>
+</section>
+
+<div class="barra-contenedor"><div class="barra" id="barra-progreso"></div></div>
+
+<section class="tarjeta" id="tarjeta">
+<span class="etiqueta" id="titulo-paso"></span>
+<p class="pregunta" id="pregunta"></p>
+<p class="instruccion" id="instruccion"></p>
+<div id="alternativas"></div>
+
+<div class="botones">
+<button class="boton" id="boton-comprobar" onclick="comprobar()">Comprobar respuesta</button>
+<button class="boton boton-secundario" id="boton-siguiente" onclick="siguiente()" style="display:none">Siguiente paso</button>
+</div>
+
+<div id="retroalimentacion"></div>
+</section>
+
+<a class="volver" href="menu-alimentado.html">← Volver a la ruta de Estado alimentado</a>
+</main>
+
+<script>
+const pasos = [
+{
+titulo:"Paso 1 · Estado metabólico",
+pregunta:"¿En qué estado metabólico se encuentra la persona?",
+tipo:"radio",
+opciones:[
+"Estado alimentado o posprandial",
+"Ayuno prolongado",
+"Ejercicio intenso",
+"Recuperación después de hipoglicemia"
+],
+correctas:[0],
+explicacion:"La persona acaba de consumir una comida mixta; por lo tanto, se encuentra en estado alimentado o posprandial.",
+clave:"Primero se identifica el contexto fisiológico."
+},
+{
+titulo:"Paso 2 · Desafío energético",
+pregunta:"¿Cuál es el principal desafío energético del organismo?",
+tipo:"radio",
+opciones:[
+"Producir cuerpos cetónicos como combustible principal",
+"Distribuir y almacenar eficientemente la energía proveniente de los alimentos sin alterar la glicemia",
+"Movilizar las reservas de grasa corporal",
+"Mantener la glicemia mediante gluconeogénesis"
+],
+correctas:[1],
+explicacion:"Después de la comida, el organismo debe utilizar los nutrientes disponibles, reponer reservas y almacenar el exceso sin provocar una elevación sostenida de la glicemia.",
+clave:"El metabolismo responde a un desafío, no activa vías al azar."
+},
+{
+titulo:"Paso 3 · Variables metabólicas",
+pregunta:"¿Qué variables aumentan después de una comida mixta?",
+instruccion:"Selecciona todas las respuestas correctas.",
+tipo:"checkbox",
+opciones:[
+"Glucosa plasmática",
+"Aminoácidos plasmáticos",
+"Quilomicrones",
+"Flujo de nutrientes desde el intestino",
+"AMP celular",
+"Cuerpos cetónicos"
+],
+correctas:[0,1,2,3],
+explicacion:"Aumentan la glucosa, los aminoácidos, los quilomicrones y el flujo de nutrientes desde el intestino. AMP y cuerpos cetónicos no son las variables predominantes de este estado.",
+clave:"Primero cambian las variables; después aparece la respuesta reguladora."
+},
+{
+titulo:"Paso 4 · Respuesta reguladora",
+pregunta:"¿Qué señales predominan en el estado alimentado?",
+instruccion:"Selecciona todas las respuestas correctas.",
+tipo:"checkbox",
+opciones:[
+"Aumento de insulina",
+"Aumento de GLP-1 y GIP",
+"Disminución relativa de glucagón",
+"Activación de mTORC1",
+"Activación predominante de AMPK",
+"Aumento de adrenalina como señal principal"
+],
+correctas:[0,1,2,3],
+explicacion:"La abundancia de nutrientes eleva la insulina y las incretinas, reduce relativamente el glucagón y favorece mTORC1. AMPK y adrenalina no predominan.",
+clave:"El mensaje general es utilizar, sintetizar y almacenar."
+},
+{
+titulo:"Paso 5 · Órganos participantes",
+pregunta:"¿Qué órganos y tejidos participan de manera central?",
+instruccion:"Selecciona todas las respuestas correctas.",
+tipo:"checkbox",
+opciones:[
+"Intestino",
+"Páncreas",
+"Hígado",
+"Músculo esquelético",
+"Tejido adiposo",
+"Corteza suprarrenal como órgano principal"
+],
+correctas:[0,1,2,3,4],
+explicacion:"El intestino absorbe, el páncreas coordina hormonalmente y el hígado, músculo y tejido adiposo utilizan o almacenan nutrientes.",
+clave:"Cada órgano cumple una misión energética distinta."
+},
+{
+titulo:"Paso 6 · Respuesta metabólica de los órganos",
+pregunta:"¿Cuál conjunto describe mejor la respuesta de los órganos?",
+tipo:"radio",
+opciones:[
+"Hígado: cetogénesis; músculo: gluconeogénesis; adiposo: lipólisis",
+"Hígado: síntesis de glucógeno y lípidos; músculo: captación de glucosa y síntesis de glucógeno; adiposo: captación de glucosa y almacenamiento de triacilglicéridos",
+"Hígado: glucogenólisis; músculo: liberación de glucosa; adiposo: liberación de ácidos grasos",
+"Todos los órganos realizan exactamente las mismas vías"
+],
+correctas:[1],
+explicacion:"En estado alimentado, el hígado almacena y transforma nutrientes, el músculo capta glucosa mediante GLUT4 y repone glucógeno, y el tejido adiposo favorece la síntesis de triacilglicéridos.",
+clave:"Las vías metabólicas aparecen como respuesta a la misión de cada órgano."
+},
+{
+titulo:"Paso 7 · Selección y flujo de combustibles",
+pregunta:"¿Cuál secuencia representa mejor el flujo de combustibles?",
+tipo:"radio",
+opciones:[
+"Intestino → nutrientes en sangre → hígado, músculo y tejido adiposo → utilización y almacenamiento",
+"Tejido adiposo → ácidos grasos → hígado → cuerpos cetónicos",
+"Hígado → glucosa → intestino → almacenamiento",
+"Músculo → glucosa → sangre → cerebro"
+],
+correctas:[0],
+explicacion:"Los nutrientes absorbidos pasan a la circulación y se distribuyen hacia hígado, músculo y tejido adiposo, donde se utilizan o almacenan.",
+clave:"El flujo de combustibles conecta a los órganos."
+},
+{
+titulo:"Paso 8 · Resultado y homeostasis",
+pregunta:"¿Cuál es el resultado final de la respuesta metabólica?",
+tipo:"radio",
+opciones:[
+"Se mantiene elevada la gluconeogénesis",
+"Se produce una movilización general de reservas",
+"Se utilizan los nutrientes disponibles, se reponen reservas y se mantiene la homeostasis de la glicemia",
+"El cerebro cambia completamente a cuerpos cetónicos"
+],
+correctas:[2],
+explicacion:"La respuesta integrada permite utilizar los nutrientes recién absorbidos, reponer glucógeno, almacenar el exceso y mantener la glicemia dentro de un rango fisiológico.",
+clave:"El algoritmo termina comprobando si el desafío fue resuelto."
+}
+];
+
+let actual=0;
+let respondido=false;
+
+function render(){
+ respondido=false;
+ const p=pasos[actual];
+ document.getElementById("numero-paso").textContent=`${actual+1} de ${pasos.length}`;
+ const porcentaje=Math.round((actual+1)/pasos.length*100);
+ document.getElementById("progreso-texto").textContent=`${porcentaje} %`;
+ document.getElementById("barra-progreso").style.width=porcentaje+"%";
+ document.getElementById("titulo-paso").textContent=p.titulo;
+ document.getElementById("pregunta").textContent=p.pregunta;
+ document.getElementById("instruccion").textContent=p.instruccion||"Selecciona la respuesta correcta.";
+ const c=document.getElementById("alternativas");
+ c.innerHTML="";
+ p.opciones.forEach((texto,i)=>{
+   const label=document.createElement("label");
+   label.className="alternativa";
+   label.innerHTML=`<input type="${p.tipo}" name="respuesta" value="${i}"> ${texto}`;
+   c.appendChild(label);
+ });
+ const r=document.getElementById("retroalimentacion");
+ r.style.display="none"; r.innerHTML="";
+ document.getElementById("boton-comprobar").style.display="inline-block";
+ document.getElementById("boton-siguiente").style.display="none";
+ document.getElementById("boton-siguiente").textContent=actual===pasos.length-1?"Ver integración final":"Siguiente paso";
+}
+
+function seleccion(){
+ return [...document.querySelectorAll('input[name="respuesta"]:checked')].map(x=>Number(x.value)).sort((a,b)=>a-b);
+}
+
+function iguales(a,b){
+ return a.length===b.length && a.every((v,i)=>v===b[i]);
+}
+
+function comprobar(){
+ if(respondido)return;
+ const sel=seleccion();
+ const r=document.getElementById("retroalimentacion");
+ if(sel.length===0){
+   r.style.display="block";
+   r.className="incorrecta";
+   r.innerHTML="<strong>Selecciona al menos una alternativa antes de comprobar.</strong>";
+   return;
+ }
+ respondido=true;
+ const p=pasos[actual];
+ const ok=iguales(sel,p.correctas.slice().sort((a,b)=>a-b));
+ r.style.display="block";
+ r.className=ok?"correcta":"incorrecta";
+ r.innerHTML= ok
+ ? `<strong>✅ Correcto.</strong><p>${p.explicacion}</p><p><strong>Idea clave:</strong> ${p.clave}</p>`
+ : `<strong>❌ Revisemos el razonamiento.</strong><p>${p.explicacion}</p><p><strong>Idea clave:</strong> ${p.clave}</p>`;
+ document.querySelectorAll('input[name="respuesta"]').forEach(i=>i.disabled=true);
+ document.getElementById("boton-comprobar").style.display="none";
+ document.getElementById("boton-siguiente").style.display="inline-block";
+}
+
+function siguiente(){
+ actual++;
+ if(actual<pasos.length){
+   render();
+   window.scrollTo({top:0,behavior:"smooth"});
+ }else{
+   mostrarFinal();
+ }
+}
+
+function mostrarFinal(){
+ localStorage.setItem("ruta_estado_alimentado_completada", JSON.stringify({
+   completada:true,
+   fecha:new Date().toLocaleDateString("es-CL")
+ }));
+ document.getElementById("barra-progreso").style.width="100%";
+ document.getElementById("progreso-texto").textContent="100 %";
+ document.getElementById("numero-paso").textContent="8 de 8";
+ document.getElementById("tarjeta").innerHTML=`
+ <div class="resultado-final">
+   <h2>Ruta completada</h2>
+   <p class="resultado-numero">8 / 8</p>
+   <p>Has recorrido el razonamiento completo del estado alimentado.</p>
+   <div class="resumen">
+     <div><strong>1. Estado:</strong> alimentado o posprandial.</div>
+     <div><strong>2. Desafío:</strong> distribuir, utilizar y almacenar nutrientes manteniendo la glicemia.</div>
+     <div><strong>3. Variables:</strong> aumentan glucosa, aminoácidos, quilomicrones y flujo intestinal.</div>
+     <div><strong>4. Regulación:</strong> predominan insulina, incretinas y mTORC1.</div>
+     <div><strong>5. Órganos:</strong> intestino, páncreas, hígado, músculo y tejido adiposo.</div>
+     <div><strong>6. Respuesta:</strong> captación, utilización, síntesis y almacenamiento.</div>
+     <div><strong>7. Flujo:</strong> intestino → sangre → órganos consumidores y de reserva.</div>
+     <div><strong>8. Resultado:</strong> reposición de reservas y homeostasis de la glicemia.</div>
+   </div>
+   <div class="botones" style="justify-content:center">
+     <button class="boton" onclick="location.reload()">Repetir ruta</button>
+     <a class="boton boton-secundario" href="estado-alimentado.html">Ir a la práctica de fundamentos</a>
+   </div>
+ </div>`;
+}
+
+render();
+</script>
+</body>
+</html>

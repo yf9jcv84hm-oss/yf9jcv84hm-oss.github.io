@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ruta de aprendizaje: Estado alimentado</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:Arial,sans-serif;background:#f3f7f6;margin:0;color:#243238}
+.contenedor{max-width:1120px;margin:auto;padding:35px 20px 55px}.encabezado{text-align:center;margin-bottom:35px}
+.encabezado h1{color:#1e6f8b;font-size:43px;margin:10px 0}.encabezado p{max-width:780px;margin:auto;color:#555;font-size:20px;line-height:1.55}
+.etiqueta-principal{display:inline-block;background:#dcefe4;color:#246b45;padding:8px 16px;border-radius:22px;font-weight:bold}
+.seccion{background:#fff;border-radius:20px;padding:32px;margin-bottom:28px;box-shadow:0 5px 18px rgba(0,0,0,.08)}
+.titulo-seccion{display:flex;align-items:center;gap:13px;margin-bottom:12px}.numero{width:43px;height:43px;border-radius:50%;background:#1e6f8b;color:#fff;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:bold}
+h2,h3{color:#1e6f8b}.introduccion{color:#555;font-size:18px;line-height:1.55}
+.mapa{text-align:center;background:#f7faf9;border:2px solid #dbe7e5;border-radius:18px;padding:25px}.caja{display:inline-block;min-width:200px;background:#fff;border:2px solid #87b4aa;border-radius:13px;padding:13px 20px;font-weight:bold}.hormona{background:#dcefe4;color:#246b45}.flecha{font-size:28px;color:#1e6f8b;margin:7px}
+.organos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.organo,.tarjeta{background:#fff;border:2px solid #dbe5e3;border-radius:16px;padding:20px}.organo{text-align:center}
+.algoritmo{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.paso{background:#f7faf9;border:2px solid #dbe7e5;border-radius:16px;padding:19px}.paso b{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;background:#2e8b57;color:#fff;border-radius:50%}.ejemplo{display:block;margin-top:12px;background:#dcefe4;color:#246b45;border-radius:9px;padding:9px;font-weight:bold}
+.practicas{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.tarjeta{display:flex;flex-direction:column;justify-content:space-between;min-height:335px}.estado{display:inline-block;padding:7px 12px;border-radius:18px;font-size:14px;font-weight:bold}.pendiente{background:#f3ead8;color:#8a6827}.completado{background:#dcefe4;color:#246b45}
+.progreso{height:12px;background:#e1e8e7;border-radius:12px;overflow:hidden;margin:12px 0}.relleno{height:100%;background:#2e8b57;width:0}.resultado{font-weight:bold;color:#1e6f8b}
+.boton{display:block;text-align:center;background:#2e8b57;color:#fff;text-decoration:none;border:none;border-radius:12px;padding:14px 17px;font-weight:bold;font-size:16px;margin-top:17px;cursor:pointer}.boton-morado{background:#76518f}.boton-gris{background:#899795}.boton-deshabilitado{background:#aeb8b5;cursor:not-allowed;pointer-events:none}
+.explorador{background:linear-gradient(135deg,#edf5fa,#eef7f2);border:2px solid #c9ddd7;text-align:center}.explorador h2{font-size:30px}.explorador p{max-width:760px;margin:0 auto 18px;line-height:1.55;font-size:18px}.boton-mapa{display:inline-block;background:#1e6f8b;color:#fff;text-decoration:none;border-radius:12px;padding:14px 22px;font-weight:bold}.logro{text-align:center;background:linear-gradient(135deg,#eef7f2,#edf5fa)}.medalla{font-size:70px}.bloqueada{filter:grayscale(1);opacity:.45}.desbloqueada{filter:none;opacity:1}.volver{color:#1e6f8b;text-decoration:none;font-weight:bold}
+@media(max-width:850px){.algoritmo{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.practicas,.organos,.algoritmo{grid-template-columns:1fr}.contenedor{padding:25px 14px}.seccion{padding:23px 18px}}
+</style>
+</head>
+<body>
+<main class="contenedor">
+<header class="encabezado"><span class="etiqueta-principal">Ruta de aprendizaje</span><h1>🍽️ Estado alimentado</h1><p>Aprende a razonar cómo el organismo utiliza, distribuye y almacena los nutrientes después de una comida.</p></header>
+
+<section class="seccion"><div class="titulo-seccion"><div class="numero">1</div><h2>Mapa conceptual</h2></div>
+<div class="mapa"><div class="caja">🍽️ Comida</div><div class="flecha">↓</div><div class="caja">↑ Nutrientes en sangre</div><div class="flecha">↓</div><div class="caja hormona">↑ Insulina</div><div class="flecha">↓</div>
+<div class="organos"><div class="organo"><h3>🫀 Hígado</h3><p>↑ Glucólisis</p><p>↑ Glucogénesis</p><p>↑ Lipogénesis</p></div><div class="organo"><h3>💪 Músculo</h3><p>↑ GLUT4</p><p>↑ Glucógeno</p><p>↑ Síntesis proteica</p></div><div class="organo"><h3>🟡 Tejido adiposo</h3><p>↑ GLUT4</p><p>↑ Glicerol-3-fosfato</p><p>↑ Triacilglicéridos</p></div></div></div></section>
+
+<section class="seccion"><div class="titulo-seccion"><div class="numero">2</div><h2>Ruta de razonamiento metabólico</h2></div>
+<p class="introduccion">Antes de estudiar detalles bioquímicos, aprende el algoritmo completo que utilizarás durante todo el curso.</p>
+<div class="algoritmo">
+<div class="paso"><b>1</b><h3>Estado</h3></div>
+<div class="paso"><b>2</b><h3>Desafío energético</h3></div>
+<div class="paso"><b>3</b><h3>Variables</h3></div>
+<div class="paso"><b>4</b><h3>Regulación</h3></div>
+<div class="paso"><b>5</b><h3>Órganos</h3></div>
+<div class="paso"><b>6</b><h3>Respuesta</h3></div>
+<div class="paso"><b>7</b><h3>Combustibles</h3></div>
+<div class="paso"><b>8</b><h3>Homeostasis</h3></div>
+</div>
+<a class="boton" href="algoritmo-estado-alimentado.html">🧭 Comenzar ruta de razonamiento</a>
+</section>
+
+
+<section class="seccion explorador">
+<div style="font-size:58px">🧍</div>
+<h2>Mapa interactivo del cuerpo</h2>
+<p>Explora cómo cambian cerebro, hígado, páncreas, intestino, músculo, tejido adiposo y sangre durante el estado alimentado, el ayuno y el ejercicio.</p>
+<a class="boton-mapa" href="mapa-interactivo-cuerpo.html">Abrir mapa interactivo</a>
+</section>
+
+<section class="seccion"><div class="titulo-seccion"><div class="numero">3</div><h2>Entrenamiento y progreso</h2></div><p class="introduccion">Comienza con los fundamentos y continúa con la integración entre órganos. Los casos y el paciente virtual se incorporarán en una próxima etapa.</p>
+<div class="practicas">
+<article class="tarjeta"><div><div style="font-size:42px">📘</div><span id="estado-fund" class="estado pendiente">Pendiente</span><h3>Fundamentos (después de la ruta)</h3><p>Insulina, GLUT4, glucogénesis, glucólisis y almacenamiento.</p><div class="progreso"><div id="barra-fund" class="relleno"></div></div><p id="resultado-fund" class="resultado">Aún sin resultado</p></div><a class="boton" href="estado-alimentado.html">Comenzar fundamentos</a></article>
+
+<article class="tarjeta"><div><div style="font-size:42px">🫀</div><span id="estado-int" class="estado pendiente">Pendiente</span><h3>Integración entre órganos</h3><p>Coordinación entre hígado, músculo y tejido adiposo.</p><div class="progreso"><div id="barra-int" class="relleno"></div></div><p id="resultado-int" class="resultado">Aún sin resultado</p></div><a class="boton" href="integracion-alimentado.html">Comenzar integración</a></article>
+
+<article class="tarjeta"><div><div style="font-size:42px">🩺</div><span id="estado-casos" class="estado pendiente">Pendiente</span><h3>Casos integradores</h3><p>Situaciones fisiológicas para aplicar el algoritmo completo.</p><div class="progreso"><div id="barra-casos" class="relleno"></div></div><p id="resultado-casos" class="resultado">Aún sin resultado</p></div><span class="boton boton-deshabilitado" aria-disabled="true">En preparación</span></article>
+
+<article class="tarjeta"><div><div style="font-size:42px">🧑‍⚕️</div><span id="estado-paciente" class="estado pendiente">Pendiente</span><h3>Paciente virtual</h3><p>Analiza a Ana paso a paso y construye una explicación integrada de su metabolismo.</p><div class="progreso"><div id="barra-paciente" class="relleno"></div></div><p id="resultado-paciente" class="resultado">Aún sin resultado</p></div><span class="boton boton-morado boton-deshabilitado" aria-disabled="true">En preparación</span></article>
+</div>
+<button class="boton boton-gris" onclick="reiniciarProgreso()" style="max-width:290px;margin:25px auto 0">Reiniciar progreso guardado</button>
+</section>
+
+<section class="seccion logro"><div id="medalla" class="medalla bloqueada">🏅</div><h2 id="titulo-logro">Logro bloqueado</h2><p id="texto-logro">Obtén al menos 60 % en fundamentos e integración para completar la ruta disponible.</p></section>
+<a class="volver" href="unidades.html">← Volver a las unidades</a>
+</main>
+<script>
+function leer(clave){try{return JSON.parse(localStorage.getItem(clave)||"null")}catch{return null}}
+function pintar(clave,estadoId,barraId,resultadoId){
+const d=leer(clave);if(!d)return false;
+document.getElementById(barraId).style.width=d.porcentaje+"%";
+document.getElementById(resultadoId).textContent=`Mejor resultado: ${d.porcentaje} % (${d.puntaje}/${d.total})`;
+const e=document.getElementById(estadoId);
+if(d.porcentaje>=60){e.textContent="Completado";e.className="estado completado";return true}
+e.textContent="Intentado";e.className="estado pendiente";return false
+}
+function actualizar(){
+const a=pintar("progreso_fundamentos_alimentado","estado-fund","barra-fund","resultado-fund");
+const b=pintar("progreso_integracion_alimentado","estado-int","barra-int","resultado-int");
+const c=pintar("progreso_casos_alimentado","estado-casos","barra-casos","resultado-casos");
+const d=pintar("progreso_paciente_alimentado","estado-paciente","barra-paciente","resultado-paciente");
+if(a&&b){
+document.getElementById("medalla").className="medalla desbloqueada";
+document.getElementById("titulo-logro").textContent="🏆 Ruta inicial completada";
+document.getElementById("texto-logro").textContent="Logro desbloqueado: completaste fundamentos e integración entre órganos.";
+}
+}
+function reiniciarProgreso(){
+if(confirm("¿Deseas borrar todos los resultados guardados de esta ruta?")){
+["progreso_fundamentos_alimentado","progreso_integracion_alimentado","progreso_casos_alimentado","progreso_paciente_alimentado"].forEach(k=>localStorage.removeItem(k));
+location.reload();
+}}
+actualizar();
+</script>
+</body>
+</html>

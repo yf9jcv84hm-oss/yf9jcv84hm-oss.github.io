@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Integración entre órganos | Academia de Metabolismo</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:Arial,sans-serif;background:#f3f7f6;margin:0;color:#243238;line-height:1.55}.contenedor{max-width:1080px;margin:auto;padding:32px 20px 54px}.encabezado{text-align:center;margin:8px auto 28px}.encabezado h1{color:#1e6f8b;font-size:clamp(30px,5vw,42px);margin:12px 0}.encabezado p{max-width:850px;margin:auto;color:#555;font-size:18px}.etiqueta{display:inline-block;background:#f6ead5;color:#8a6827;padding:7px 15px;border-radius:22px;font-weight:bold}.seccion{background:#fff;border-radius:18px;padding:26px;margin:22px 0;box-shadow:0 5px 18px rgba(0,0,0,.07)}h2,h3{color:#1e6f8b;margin-top:0}.seccion h2{font-size:24px}.seccion p{line-height:1.6}.rejilla{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.tarjeta{background:#f8faf9;border:1px solid #dbe7e5;border-radius:14px;padding:18px}.tarjeta h3{margin:0 0 8px}.idea{display:block;margin-top:10px;padding:10px 12px;background:#f6ead5;border-radius:10px;color:#634d1d}.tabla-wrap{overflow-x:auto}.tabla{width:100%;border-collapse:collapse;min-width:680px}.tabla th,.tabla td{padding:12px;text-align:left;border-bottom:1px solid #dbe7e5;vertical-align:top}.tabla th{background:#eaf3f5;color:#1e5264}.herramientas{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}.boton{display:inline-block;background:#2e8b57;color:#fff;text-decoration:none;border:0;border-radius:10px;padding:12px 16px;font-weight:bold;cursor:pointer;font-size:15px}.boton:hover{filter:brightness(.95)}.boton-morado{background:#76518f}.boton-secundario{background:#1e6f8b}.volver{display:inline-block;margin-top:18px;color:#1e6f8b;text-decoration:none;font-weight:bold}.nota{background:#fff8e7;border-left:5px solid #d39a2b;border-radius:9px;padding:13px 16px;margin:16px 0}.quiz{background:#f8faf9;border:2px solid #dbe7e5;border-radius:16px;padding:20px}.pregunta{border:0;border-bottom:1px solid #dbe7e5;padding:15px 0;margin:0}.pregunta legend{font-weight:bold;padding:0 0 8px}.opcion{display:block;margin:8px 0;padding:8px 10px;background:#fff;border-radius:8px;cursor:pointer}.opcion input{margin-right:8px}.retro{display:none;padding:9px 11px;border-radius:8px;margin-top:9px}.retro.correcta{display:block;background:#e3f4e8;color:#205f35}.retro.incorrecta{display:block;background:#fff0ed;color:#8b3427}.resumen-quiz{font-weight:bold;margin:14px 0 0;color:#1e6f8b;min-height:24px}.organo-botones{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.organo-botones button{border:2px solid #dbe7e5;border-radius:12px;background:#fff;padding:12px 8px;color:#243238;font-weight:bold;cursor:pointer}.organo-botones button.activo{border-color:#d39a2b;background:#fff8e7}.detalle-organo{margin-top:15px;min-height:130px}.caso{border-left:5px solid #d39a2b}.etapa{padding:13px 15px;border:1px solid #dbe7e5;border-radius:12px;margin:10px 0;background:#f8faf9}.etapa summary{font-weight:bold;color:#1e6f8b;cursor:pointer}.pie{margin-top:28px;padding-top:14px;border-top:1px solid #dbe7e5;color:#59676b;font-size:14px}.ayuda-progreso{font-size:14px;color:#5b686b}@media(max-width:720px){.contenedor{padding:22px 13px 40px}.seccion{padding:20px 16px}.rejilla{grid-template-columns:1fr}.organo-botones{grid-template-columns:repeat(2,minmax(0,1fr))}.tabla{min-width:600px}}
+</style>
+</head>
+<body>
+<main class="contenedor">
+<header class="encabezado"><span class="etiqueta">Ruta de aprendizaje · Ayuno</span><h1>🫀 Integración entre órganos</h1><p>Sigue los metabolitos entre tejidos y explica cómo sus funciones coordinadas ayudan a sostener la energía durante el ayuno.</p></header>
+
+<section class="seccion"><h2>Explora la función de cada órgano</h2><p>Selecciona un órgano para revisar qué recibe, qué libera y cómo contribuye a la adaptación al ayuno.</p>
+<div class="organo-botones" role="group" aria-label="Selecciona un órgano">
+<button class="activo" type="button" data-organo="higado">🫀 Hígado</button><button type="button" data-organo="adiposo">🟡 Tejido adiposo</button><button type="button" data-organo="musculo">💪 Músculo</button><button type="button" data-organo="cerebro">🧠 Cerebro</button><button type="button" data-organo="eritrocito">🩸 Eritrocito</button>
+</div>
+<div class="tarjeta detalle-organo" aria-live="polite"><h3 id="titulo-organo"></h3><p><strong>Recibe:</strong> <span id="recibe"></span></p><p><strong>Libera o utiliza:</strong> <span id="entrega"></span></p><p><strong>Contribución:</strong> <span id="funcion"></span></p></div>
+</section>
+<section class="seccion"><h2>Conecta los flujos</h2><div class="tabla-wrap"><table class="tabla"><thead><tr><th>Origen</th><th>Metabolito</th><th>Destino</th><th>Para qué sirve</th></tr></thead><tbody>
+<tr><td>Tejido adiposo</td><td>Ácidos grasos</td><td>Músculo e hígado</td><td>Oxidación para producir energía.</td></tr>
+<tr><td>Tejido adiposo</td><td>Glicerol</td><td>Hígado (y riñón)</td><td>Precursor para gluconeogénesis.</td></tr>
+<tr><td>Músculo y eritrocitos</td><td>Lactato</td><td>Hígado</td><td>Puede convertirse en glucosa mediante gluconeogénesis.</td></tr>
+<tr><td>Músculo</td><td>Alanina</td><td>Hígado</td><td>Transporta carbono y nitrógeno; su carbono puede entrar en gluconeogénesis.</td></tr>
+<tr><td>Hígado</td><td>Glucosa</td><td>Sangre y tejidos dependientes</td><td>Ayuda a sostener la glicemia.</td></tr>
+<tr><td>Hígado</td><td>Cuerpos cetónicos</td><td>Cerebro y otros tejidos extrahepáticos</td><td>Combustible cuya utilización aumenta durante el ayuno prolongado.</td></tr>
+</tbody></table></div>
+<div class="herramientas"><a class="boton" href="atlas-metabolico.html?estado=ayuno&volver=integracion-ayuno.html">Abrir el Atlas en modo Ayuno</a><a class="boton boton-morado" href="red-comunicacion-organos.html?estado=ayuno&volver=integracion-ayuno.html">Ver la Red en modo Ayuno</a></div>
+<p class="nota"><strong>Importante:</strong> el cerebro aumenta el uso de cuerpos cetónicos cuando el ayuno se prolonga, pero sigue necesitando glucosa. Los eritrocitos dependen de la glucólisis porque carecen de mitocondrias y liberan lactato.</p>
+</section>
+<section class="seccion"><h2>Comprueba tu razonamiento</h2>
+<p>Selecciona una alternativa en cada pregunta y luego pulsa <strong>Comprobar respuestas</strong>. Para completar este módulo necesitas al menos <strong>4/5</strong>.</p>
+<div class="quiz" id="quiz">
+<fieldset class="pregunta" data-correcta="0" data-explicacion="El glicerol liberado desde triacilglicéridos puede entrar en la vía gluconeogénica."><legend>1. ¿Qué producto de la lipólisis puede aportar carbono para gluconeogénesis?</legend>
+<label class="opcion"><input type="radio" name="q1" value="0"> Glicerol</label>
+<label class="opcion"><input type="radio" name="q1" value="1"> Acetil-CoA de ácidos grasos de cadena par</label>
+<label class="opcion"><input type="radio" name="q1" value="2"> Colesterol</label>
+<div class="retro" aria-live="polite"></div></fieldset>
+<fieldset class="pregunta" data-correcta="1" data-explicacion="Los eritrocitos carecen de mitocondrias; dependen de la glucólisis y liberan lactato."><legend>2. ¿Qué hacen los eritrocitos durante el ayuno?</legend>
+<label class="opcion"><input type="radio" name="q2" value="0"> Oxidan ácidos grasos en sus mitocondrias</label>
+<label class="opcion"><input type="radio" name="q2" value="1"> Usan glucosa por glucólisis y liberan lactato</label>
+<label class="opcion"><input type="radio" name="q2" value="2"> Producen cuerpos cetónicos</label>
+<div class="retro" aria-live="polite"></div></fieldset>
+<fieldset class="pregunta" data-correcta="1" data-explicacion="El músculo utiliza su glucógeno localmente y no exporta glucosa libre."><legend>3. ¿Qué afirmación describe el glucógeno del músculo esquelético?</legend>
+<label class="opcion"><input type="radio" name="q3" value="0"> Se libera como glucosa libre para todo el organismo</label>
+<label class="opcion"><input type="radio" name="q3" value="1"> Se utiliza principalmente en el propio músculo</label>
+<label class="opcion"><input type="radio" name="q3" value="2"> Se transforma directamente en glicerol</label>
+<div class="retro" aria-live="polite"></div></fieldset>
+<fieldset class="pregunta" data-correcta="0" data-explicacion="El hígado sintetiza cuerpos cetónicos a partir de acetil-CoA; otros tejidos pueden utilizarlos."><legend>4. ¿Qué órgano produce cuerpos cetónicos en el ayuno?</legend>
+<label class="opcion"><input type="radio" name="q4" value="0"> Hígado</label>
+<label class="opcion"><input type="radio" name="q4" value="1"> Eritrocito</label>
+<label class="opcion"><input type="radio" name="q4" value="2"> Tejido adiposo</label>
+<div class="retro" aria-live="polite"></div></fieldset>
+<fieldset class="pregunta" data-correcta="0" data-explicacion="La adaptación aumenta el uso cerebral de cetonas, pero no elimina por completo la necesidad de glucosa."><legend>5. ¿Qué ocurre con el combustible cerebral cuando el ayuno se prolonga?</legend>
+<label class="opcion"><input type="radio" name="q5" value="0"> Aumenta la utilización de cuerpos cetónicos, aunque sigue requiriendo glucosa</label>
+<label class="opcion"><input type="radio" name="q5" value="1"> El cerebro usa exclusivamente ácidos grasos de cadena larga</label>
+<label class="opcion"><input type="radio" name="q5" value="2"> El cerebro deja de producir ATP</label>
+<div class="retro" aria-live="polite"></div></fieldset>
+<button class="boton boton-morado" id="comprobar" type="button">Comprobar respuestas</button><p class="resumen-quiz" id="resumen-quiz" aria-live="polite"></p></div></section>
+<p class="ayuda-progreso">El progreso se registra en este navegador cuando se alcanza el puntaje mínimo.</p>
+<a class="volver" href="menu-ayuno.html">← Volver a la ruta de Ayuno</a>
+<footer class="pie">Academia de Metabolismo · Material educativo</footer>
+</main>
+<script>
+const MODULO = "integracion";
+const PUNTAJE_MINIMO = 4;
+const TOTAL = 5;
+function guardarLogro(puntaje){
+  try{
+    localStorage.setItem("academiaAyuno_" + MODULO, JSON.stringify({completo:true,puntaje:puntaje,total:TOTAL,fecha:new Date().toISOString()}));
+    return true;
+  }catch(e){ return false; }
+}
+document.getElementById("comprobar").addEventListener("click", function(){
+  const preguntas = Array.from(document.querySelectorAll(".pregunta"));
+  let puntaje = 0, faltan = false;
+  preguntas.forEach(function(p){
+    const seleccion = p.querySelector("input:checked");
+    const retro = p.querySelector(".retro");
+    if(!seleccion){
+      faltan = true;
+      retro.className = "retro incorrecta";
+      retro.textContent = "Selecciona una alternativa para revisar esta pregunta.";
+      return;
+    }
+    const correcta = Number(seleccion.value) === Number(p.dataset.correcta);
+    if(correcta) puntaje++;
+    retro.className = "retro " + (correcta ? "correcta" : "incorrecta");
+    retro.textContent = (correcta ? "✓ Correcto. " : "Revisa esta idea. ") + p.dataset.explicacion;
+  });
+  const resumen = document.getElementById("resumen-quiz");
+  if(faltan){
+    resumen.textContent = "Respondiste " + puntaje + " de " + TOTAL + ". Completa las preguntas pendientes y vuelve a comprobar.";
+    return;
+  }
+  if(puntaje >= PUNTAJE_MINIMO){
+    const guardado = guardarLogro(puntaje);
+    resumen.textContent = "¡Módulo completado! Puntaje: " + puntaje + "/" + TOTAL + ". " + (guardado ? "El avance quedó registrado en este navegador." : "El navegador no permitió guardar el avance; conserva esta página abierta para revisar el resultado.");
+  }else{
+    resumen.textContent = "Puntaje: " + puntaje + "/" + TOTAL + ". Revisa la retroalimentación y vuelve a intentarlo. Necesitas " + PUNTAJE_MINIMO + " respuestas correctas.";
+  }
+});
+
+const infoOrganos={
+higado:{titulo:"Hígado",recibe:"Lactato, alanina y glicerol; también ácidos grasos que oxida para obtener energía.",entrega:"Glucosa y, cuando el ayuno se prolonga, cuerpos cetónicos.",funcion:"Combina glucogenólisis y gluconeogénesis para contribuir al mantenimiento de la glicemia. La β-oxidación hepática aporta energía y acetil-CoA para la cetogénesis."},
+adiposo:{titulo:"Tejido adiposo",recibe:"Señales de baja insulina y señales lipolíticas, incluidas catecolaminas.",entrega:"Ácidos grasos y glicerol a la circulación.",funcion:"Moviliza triacilglicéridos. Los ácidos grasos se oxidan en tejidos; el glicerol puede servir como precursor gluconeogénico."},
+musculo:{titulo:"Músculo esquelético",recibe:"Ácidos grasos y, según el tiempo de ayuno y la actividad, combustibles circulantes.",entrega:"Puede aportar lactato y alanina a la circulación.",funcion:"En reposo aumenta el uso de ácidos grasos y ahorra glucosa. Su glucógeno se usa localmente, no se exporta como glucosa libre."},
+cerebro:{titulo:"Cerebro",recibe:"Glucosa; con ayuno prolongado utiliza también más cuerpos cetónicos.",entrega:"No es una fuente importante de combustible para otros órganos.",funcion:"Mantiene una demanda continua de energía. La adaptación a cetonas reduce, pero no elimina, su necesidad de glucosa."},
+eritrocito:{titulo:"Eritrocito",recibe:"Glucosa desde la sangre.",entrega:"Lactato como producto de la glucólisis.",funcion:"Al no tener mitocondrias, obtiene ATP mediante glucólisis y no puede oxidar ácidos grasos ni cuerpos cetónicos."}
+};
+function mostrarOrgano(clave){const d=infoOrganos[clave];document.getElementById("titulo-organo").textContent=d.titulo;document.getElementById("recibe").textContent=d.recibe;document.getElementById("entrega").textContent=d.entrega;document.getElementById("funcion").textContent=d.funcion;document.querySelectorAll("[data-organo]").forEach(function(b){b.classList.toggle("activo",b.dataset.organo===clave)});}
+document.querySelectorAll("[data-organo]").forEach(function(b){b.addEventListener("click",function(){mostrarOrgano(b.dataset.organo)})});mostrarOrgano("higado");
+
+</script>
+</body>
+</html>

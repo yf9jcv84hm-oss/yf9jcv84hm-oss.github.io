@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ruta de aprendizaje: Ejercicio</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:#f3f7f6;margin:0;color:#243238}
+.contenedor{max-width:1120px;margin:auto;padding:35px 20px 55px}
+.encabezado{text-align:center;margin-bottom:35px}
+.encabezado h1{color:#1e6f8b;font-size:43px;margin:10px 0}
+.encabezado p{max-width:820px;margin:auto;color:#555;font-size:20px;line-height:1.55}
+.etiqueta-principal{display:inline-block;background:#dceaf5;color:#245f80;padding:8px 16px;border-radius:22px;font-weight:bold}
+.seccion{background:#fff;border-radius:20px;padding:32px;margin-bottom:28px;box-shadow:0 5px 18px rgba(0,0,0,.08)}
+.titulo-seccion{display:flex;align-items:center;gap:13px;margin-bottom:12px}
+.numero{width:43px;height:43px;border-radius:50%;background:#1e6f8b;color:#fff;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:bold}
+h2,h3{color:#1e6f8b}
+.introduccion{color:#555;font-size:18px;line-height:1.55}
+.mapa{text-align:center;background:#f7faf9;border:2px solid #dbe7e5;border-radius:18px;padding:25px}
+.caja{display:inline-block;min-width:230px;background:#fff;border:2px solid #9fc0d8;border-radius:13px;padding:13px 20px;font-weight:bold}
+.hormona{background:#dceaf5;color:#245f80}
+.flecha{font-size:28px;color:#1e6f8b;margin:7px}
+.organos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.organo{background:#fff;border:2px solid #dbe5e3;border-radius:16px;padding:20px;text-align:center}
+.algoritmo{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.paso{background:#f7faf9;border:2px solid #dbe7e5;border-radius:16px;padding:19px}
+.paso b{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;background:#4280a6;color:#fff;border-radius:50%}
+.ejemplo{display:block;margin-top:12px;background:#dceaf5;color:#245f80;border-radius:9px;padding:9px;font-weight:bold}
+.herramientas{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.herramienta{background:linear-gradient(135deg,#edf5fa,#eef7f2);border:2px solid #d6e2e6;border-radius:18px;padding:24px;text-align:center}
+.herramienta .icono{font-size:50px}
+.boton{display:inline-block;text-align:center;background:#2e8b57;color:#fff;text-decoration:none;border:none;border-radius:12px;padding:14px 18px;font-weight:bold;font-size:16px;margin-top:12px;cursor:pointer}
+.boton-morado{background:#76518f}
+.practicas{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.tarjeta{background:#fff;border:2px solid #dbe5e3;border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;min-height:310px}
+.estado{display:inline-block;padding:7px 12px;border-radius:18px;font-size:14px;font-weight:bold;background:#dceaf5;color:#245f80}
+.progreso{height:12px;background:#e1e8e7;border-radius:12px;overflow:hidden;margin:12px 0}
+.relleno{height:100%;background:#4280a6;width:0}
+.resultado{font-weight:bold;color:#1e6f8b}
+.deshabilitado{background:#aeb8b5;cursor:not-allowed;pointer-events:none}
+.aviso{background:#edf5fa;border-left:6px solid #4280a6;border-radius:12px;padding:16px;margin-top:22px;line-height:1.55}
+.logro{text-align:center;background:linear-gradient(135deg,#edf5fa,#eef7f2)}
+.medalla{font-size:70px;filter:grayscale(1);opacity:.45}
+.volver{color:#1e6f8b;text-decoration:none;font-weight:bold}
+@media(max-width:850px){.algoritmo{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.practicas,.organos,.algoritmo,.herramientas{grid-template-columns:1fr}.contenedor{padding:25px 14px}.seccion{padding:23px 18px}}
+</style>
+</head>
+<body>
+<main class="contenedor">
+
+<header class="encabezado">
+<span class="etiqueta-principal">Ruta de aprendizaje</span>
+<h1>🏃 Ejercicio</h1>
+<p>Aprende a razonar cómo la intensidad y la duración del ejercicio modifican la demanda de ATP, la selección de combustibles y la coordinación entre músculo, hígado y tejido adiposo.</p>
+</header>
+
+<section class="seccion">
+<div class="titulo-seccion"><div class="numero">1</div><h2>Mapa conceptual</h2></div>
+<div class="mapa">
+<div class="caja">🏃 Contracción muscular</div>
+<div class="flecha">↓</div>
+<div class="caja">↑ Demanda de ATP</div>
+<div class="flecha">↓</div>
+<div class="caja hormona">Ca²⁺, AMP/AMPK y catecolaminas</div>
+<div class="flecha">↓</div>
+<div class="organos">
+<div class="organo"><h3>💪 Músculo</h3><p>↑ ATP-PCr</p><p>↑ Glucogenólisis y glucólisis</p><p>↑ Oxidación de ácidos grasos</p></div>
+<div class="organo"><h3>🫀 Hígado</h3><p>↑ Glucogenólisis</p><p>↑ Gluconeogénesis</p><p>↑ Liberación de glucosa</p></div>
+<div class="organo"><h3>🟡 Tejido adiposo</h3><p>↑ Lipólisis</p><p>↑ Ácidos grasos</p><p>↑ Glicerol</p></div>
+</div>
+</div>
+</section>
+
+<section class="seccion">
+<div class="titulo-seccion"><div class="numero">2</div><h2>Algoritmo de razonamiento</h2></div>
+<p class="introduccion">Resuelve cada situación siguiendo cuatro preguntas que conectan fisiología, órgano y combustible.</p>
+<div class="algoritmo">
+<div class="paso"><b>1</b><h3>¿Qué ejercicio?</h3><p>Determina intensidad, duración y tipo de contracción.</p><span class="ejemplo">Breve e intenso o prolongado</span></div>
+<div class="paso"><b>2</b><h3>¿Cuánto ATP se necesita?</h3><p>Relaciona la demanda energética con la velocidad de producción de ATP.</p><span class="ejemplo">Inmediata, rápida o sostenida</span></div>
+<div class="paso"><b>3</b><h3>¿Qué combustible?</h3><p>Identifica ATP-PCr, glucógeno, glucosa o ácidos grasos.</p><span class="ejemplo">Depende de intensidad y duración</span></div>
+<div class="paso"><b>4</b><h3>¿Qué órganos colaboran?</h3><p>Integra músculo, hígado, adipocito, sangre y sistema hormonal.</p><span class="ejemplo">Abastecen al músculo activo</span></div>
+</div>
+</section>
+
+<section class="seccion">
+<div class="titulo-seccion"><div class="numero">3</div><h2>Exploración visual</h2></div>
+<div class="herramientas">
+<div class="herramienta">
+<div class="icono">🧍</div>
+<h3>Mapa interactivo del cuerpo</h3>
+<p>Explora la respuesta de cada órgano durante el ejercicio.</p>
+<a class="boton" href="mapa-interactivo-cuerpo.html?estado=ejercicio&volver=menu-ejercicio.html">Abrir mapa</a>
+</div>
+<div class="herramienta">
+<div class="icono">🔄</div>
+<h3>Red entre órganos</h3>
+<p>Sigue glucosa, ácidos grasos, lactato, alanina y glicerol durante el esfuerzo.</p>
+<a class="boton boton-morado" href="red-comunicacion-organos.html?estado=ejercicio&volver=menu-ejercicio.html">Explorar red</a>
+</div>
+</div>
+</section>
+
+<section class="seccion">
+<div class="titulo-seccion"><div class="numero">4</div><h2>Entrenamiento y progreso</h2></div>
+<p class="introduccion">Las herramientas visuales permiten explorar la respuesta de los órganos durante el ejercicio. Los módulos de entrenamiento específicos se incorporarán en una próxima etapa.</p>
+<div class="practicas">
+
+<article class="tarjeta">
+<div><div style="font-size:42px">⚡</div><span id="estado-fund" class="estado">Pendiente</span><h3>Fundamentos del ejercicio</h3><p>Demanda de ATP, sistema ATP-PCr, glucólisis, oxidación aeróbica y fatiga.</p><div class="progreso"><div id="barra-fund" class="relleno"></div></div><p id="resultado-fund" class="resultado">Aún sin resultado</p></div>
+<span class="boton deshabilitado" aria-disabled="true">En preparación</span>
+</article>
+
+<article class="tarjeta">
+<div><div style="font-size:42px">📈</div><span id="estado-int" class="estado">Pendiente</span><h3>Intensidad y duración</h3><p>Selección de combustibles, concepto de crossover y transición entre sistemas energéticos.</p><div class="progreso"><div id="barra-int" class="relleno"></div></div><p id="resultado-int" class="resultado">Aún sin resultado</p></div>
+<span class="boton deshabilitado" aria-disabled="true">En preparación</span>
+</article>
+
+<article class="tarjeta">
+<div><div style="font-size:42px">🩺</div><span id="estado-casos" class="estado">Pendiente</span><h3>Casos integradores</h3><p>Sprint, ejercicio moderado, ejercicio prolongado y recuperación.</p><div class="progreso"><div id="barra-casos" class="relleno"></div></div><p id="resultado-casos" class="resultado">Aún sin resultado</p></div>
+<span class="boton deshabilitado" aria-disabled="true">En preparación</span>
+</article>
+
+<article class="tarjeta">
+<div><div style="font-size:42px">🧑‍⚕️</div><span id="estado-dep" class="estado">Pendiente</span><h3>Paciente o deportista virtual</h3><p>Analiza una situación de ejercicio siguiendo el algoritmo completo.</p><div class="progreso"><div id="barra-dep" class="relleno"></div></div><p id="resultado-dep" class="resultado">Aún sin resultado</p></div>
+<span class="boton boton-morado deshabilitado" aria-disabled="true">En preparación</span>
+</article>
+
+</div>
+
+<button class="boton" id="reiniciar" style="display:block;margin:24px auto 0;background:#899795">Reiniciar progreso guardado</button>
+</section>
+
+<section class="seccion logro">
+<div id="medalla" class="medalla">🏅</div>
+<h2 id="titulo-logro">Logro bloqueado</h2>
+<p id="texto-logro">Obtén al menos 60 % en los cuatro niveles de la ruta de Ejercicio.</p>
+</section>
+
+<a class="volver" href="unidades.html">← Volver a las unidades</a>
+</main>
+
+<script>
+function leer(k){try{return JSON.parse(localStorage.getItem(k)||"null")}catch{return null}}
+function pintar(k,eid,bid,rid){
+ const d=leer(k); if(!d)return false;
+ document.getElementById(bid).style.width=d.porcentaje+"%";
+ document.getElementById(rid).textContent=`Mejor resultado: ${d.porcentaje} % (${d.puntaje}/${d.total})`;
+ const e=document.getElementById(eid);
+ if(d.porcentaje>=60){e.textContent="Completado";e.style.background="#dcefe4";e.style.color="#246b45";return true}
+ e.textContent="Intentado";return false
+}
+const a=pintar("progreso_fundamentos_ejercicio","estado-fund","barra-fund","resultado-fund");
+const b=pintar("progreso_intensidad_ejercicio","estado-int","barra-int","resultado-int");
+const c=pintar("progreso_casos_ejercicio","estado-casos","barra-casos","resultado-casos");
+const d=pintar("progreso_deportista_ejercicio","estado-dep","barra-dep","resultado-dep");
+if(a&&b&&c&&d){
+ document.getElementById("medalla").style.filter="none";
+ document.getElementById("medalla").style.opacity="1";
+ document.getElementById("titulo-logro").textContent="🏆 Integrador del ejercicio";
+ document.getElementById("texto-logro").textContent="Logro desbloqueado: dominaste fundamentos, intensidad, casos y deportista virtual.";
+}
+document.getElementById("reiniciar").addEventListener("click",()=>{
+ if(confirm("¿Deseas borrar el progreso de la unidad Ejercicio?")){
+  ["progreso_fundamentos_ejercicio","progreso_intensidad_ejercicio","progreso_casos_ejercicio","progreso_deportista_ejercicio"].forEach(k=>localStorage.removeItem(k));
+  location.reload();
+ }
+});
+</script>
+
+</body>
+</html>

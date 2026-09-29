@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mapa interactivo del cuerpo | Academia de Metabolismo</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f7f6;color:#243238}
+.contenedor{max-width:1180px;margin:0 auto;padding:32px 18px 55px}
+.encabezado{text-align:center;margin-bottom:28px}
+.encabezado h1{color:#1e6f8b;font-size:42px;margin:8px 0}
+.encabezado p{max-width:800px;margin:auto;color:#566;font-size:19px;line-height:1.55}
+.etiqueta{display:inline-block;background:#dcefe4;color:#246b45;padding:8px 16px;border-radius:22px;font-weight:bold}
+.controles{background:#fff;border-radius:18px;padding:20px;box-shadow:0 5px 18px rgba(0,0,0,.08);margin-bottom:22px}
+.controles h2{color:#1e6f8b;margin-top:0}
+.botones-estado{display:flex;gap:12px;flex-wrap:wrap}
+.boton-estado{border:2px solid #cfdcda;background:#fff;color:#365158;border-radius:22px;padding:11px 17px;font-size:16px;font-weight:bold;cursor:pointer}
+.boton-estado:hover{background:#eef5f3}
+.boton-estado.activo{background:#2e8b57;color:#fff;border-color:#2e8b57}
+.resumen-estado{margin-top:16px;padding:15px;border-radius:12px;background:#edf5fa;border-left:6px solid #1e6f8b;line-height:1.55}
+.area-principal{display:grid;grid-template-columns:420px 1fr;gap:24px;align-items:start}
+.mapa{background:#fff;border-radius:20px;padding:20px;box-shadow:0 5px 18px rgba(0,0,0,.08);position:relative}
+.mapa h2{text-align:center;color:#1e6f8b;margin:0 0 12px}
+.cuerpo{position:relative;min-height:660px;background:linear-gradient(180deg,#f8fbfa,#eef5f3);border-radius:18px;overflow:hidden}
+.silueta{position:absolute;inset:35px 85px 25px;display:flex;justify-content:center;align-items:center;font-size:430px;line-height:1;filter:grayscale(.2);opacity:.28;user-select:none}
+.organo{position:absolute;border:none;border-radius:50%;width:66px;height:66px;background:#fff;box-shadow:0 3px 12px rgba(0,0,0,.14);font-size:29px;cursor:pointer;transition:.2s;border:3px solid #b9cfca}
+.organo:hover{transform:scale(1.08)}
+.organo.activo{border-color:#2e8b57;background:#e4f3e9;transform:scale(1.08)}
+.organo small{display:block;font-size:10px;font-weight:bold;color:#31484d;margin-top:1px}
+#cerebro{top:58px;left:177px}
+#intestino{top:330px;left:177px}
+#higado{top:260px;left:112px}
+#pancreas{top:310px;left:250px}
+#musculo{top:420px;left:72px}
+#adiposo{top:455px;left:265px}
+#sangre{top:190px;left:285px}
+.leyenda{margin-top:16px;font-size:14px;color:#5a686c;text-align:center}
+.panel{background:#fff;border-radius:20px;padding:25px;box-shadow:0 5px 18px rgba(0,0,0,.08);min-height:705px}
+.panel-superior{display:flex;align-items:center;gap:15px;border-bottom:1px solid #e2e8e7;padding-bottom:17px;margin-bottom:18px}
+.icono-grande{width:72px;height:72px;border-radius:18px;background:#edf5fa;display:flex;align-items:center;justify-content:center;font-size:42px}
+.panel h2{color:#1e6f8b;margin:0}
+.estado-organo{display:inline-block;margin-top:7px;padding:6px 11px;border-radius:16px;background:#dcefe4;color:#246b45;font-weight:bold;font-size:14px}
+.descripcion{font-size:17px;line-height:1.55;color:#4f5d61}
+.grid-datos{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:20px 0}
+.dato{background:#f7faf9;border:1px solid #dce7e5;border-radius:13px;padding:15px}
+.dato h3{color:#1e6f8b;margin:0 0 8px;font-size:17px}
+.dato p{margin:0;line-height:1.45}
+.rutas{margin-top:20px}
+.ruta{display:flex;align-items:center;gap:10px;background:#f8faf9;border:1px solid #dbe5e3;border-radius:12px;padding:12px;margin:10px 0}
+.flecha{color:#2e8b57;font-weight:bold}
+.algoritmo{margin-top:22px;background:#fff8e7;border-left:6px solid #d39a2b;border-radius:12px;padding:16px;line-height:1.55}
+.pregunta-rapida{margin-top:22px;background:#f4eff8;border:1px solid #dacde5;border-radius:14px;padding:17px}
+.pregunta-rapida h3{color:#76518f;margin-top:0}
+.opcion{display:block;background:#fff;border:2px solid #ded7e5;border-radius:10px;padding:11px;margin:9px 0;cursor:pointer}
+.opcion:hover{background:#faf7fc}
+.retro{display:none;margin-top:12px;padding:12px;border-radius:10px;line-height:1.45}
+.correcta{background:#e1f4e8;border-left:5px solid #2e8b57}
+.incorrecta{background:#fde8e8;border-left:5px solid #b64646}
+.volver{display:inline-block;margin-top:25px;color:#1e6f8b;text-decoration:none;font-weight:bold}
+@media(max-width:900px){.area-principal{grid-template-columns:1fr}.mapa{max-width:480px;margin:auto;width:100%}}
+@media(max-width:520px){.contenedor{padding:24px 12px}.encabezado h1{font-size:34px}.cuerpo{min-height:590px}.silueta{font-size:360px;inset:45px 45px 20px}.organo{width:60px;height:60px;font-size:25px}#cerebro{left:155px}#intestino{left:155px}#higado{left:95px}#pancreas{left:220px}#musculo{left:55px}#adiposo{left:230px}#sangre{left:245px}.grid-datos{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="contenedor">
+<header class="encabezado">
+<span class="etiqueta">Explorador metabólico</span>
+<h1>🧍 Mapa interactivo del cuerpo</h1>
+<p>Selecciona un estado fisiológico y luego un órgano. Observa cómo cambia su función según la disponibilidad de nutrientes y las señales hormonales.</p>
+</header>
+
+<section class="controles">
+<h2>1. Elige el estado fisiológico</h2>
+<div class="botones-estado">
+<button class="boton-estado activo" data-estado="alimentado">🍽️ Estado alimentado</button>
+<button class="boton-estado" data-estado="ayuno">🌙 Ayuno</button>
+<button class="boton-estado" data-estado="ejercicio">🏃 Ejercicio</button>
+</div>
+<div class="resumen-estado" id="resumen-estado"></div>
+</section>
+
+<div class="area-principal">
+<section class="mapa">
+<h2>2. Selecciona un órgano</h2>
+<div class="cuerpo">
+<div class="silueta">🧍</div>
+<button class="organo activo" id="cerebro" data-organo="cerebro">🧠<small>Cerebro</small></button>
+<button class="organo" id="sangre" data-organo="sangre">🩸<small>Sangre</small></button>
+<button class="organo" id="higado" data-organo="higado">🫀<small>Hígado</small></button>
+<button class="organo" id="pancreas" data-organo="pancreas">🟠<small>Páncreas</small></button>
+<button class="organo" id="intestino" data-organo="intestino">🌀<small>Intestino</small></button>
+<button class="organo" id="musculo" data-organo="musculo">💪<small>Músculo</small></button>
+<button class="organo" id="adiposo" data-organo="adiposo">🟡<small>Adiposo</small></button>
+</div>
+<div class="leyenda">Los órganos se iluminan al seleccionarlos.</div>
+</section>
+
+<section class="panel">
+<div class="panel-superior">
+<div class="icono-grande" id="icono-organo">🧠</div>
+<div>
+<h2 id="nombre-organo">Cerebro</h2>
+<span class="estado-organo" id="estado-organo">Estado alimentado</span>
+</div>
+</div>
+
+<p class="descripcion" id="descripcion"></p>
+
+<div class="grid-datos">
+<div class="dato"><h3>Combustible principal</h3><p id="combustible"></p></div>
+<div class="dato"><h3>Señal predominante</h3><p id="senal"></p></div>
+<div class="dato"><h3>Proceso que aumenta</h3><p id="aumenta"></p></div>
+<div class="dato"><h3>Proceso que disminuye</h3><p id="disminuye"></p></div>
+</div>
+
+<div class="rutas">
+<h3>Rutas metabólicas destacadas</h3>
+<div id="lista-rutas"></div>
+</div>
+
+<div class="algoritmo">
+<strong>Algoritmo aplicado:</strong>
+<div id="algoritmo"></div>
+</div>
+
+<div class="pregunta-rapida">
+<h3>Pregunta rápida</h3>
+<p id="pregunta"></p>
+<div id="opciones"></div>
+<div id="retro" class="retro"></div>
+</div>
+</section>
+</div>
+
+<a class="volver" href="menu-alimentado.html">← Volver a la ruta de Estado alimentado</a>
+</main>
+
+<script>
+const datos={
+alimentado:{
+resumen:"Después de una comida aumentan los nutrientes circulantes. La insulina coordina la utilización inmediata y el almacenamiento del exceso.",
+cerebro:{icono:"🧠",descripcion:"El cerebro utiliza principalmente glucosa y mantiene un consumo continuo de energía.",combustible:"Glucosa",senal:"Disponibilidad de glucosa; no depende de GLUT4",aumenta:"Oxidación de glucosa",disminuye:"Uso de cuerpos cetónicos",rutas:["Glucosa → glucólisis → piruvato","Piruvato → acetil-CoA → ciclo de Krebs","NADH/FADH₂ → cadena respiratoria → ATP"],algoritmo:"Estado alimentado → glucosa disponible → cerebro → utiliza glucosa para producir ATP.",pregunta:"¿Qué transportador de glucosa predomina en la barrera hematoencefálica?",opciones:["GLUT1","GLUT4","SGLT1"],correcta:0,explicacion:"GLUT1 participa de forma importante en el transporte de glucosa a través de la barrera hematoencefálica."},
+sangre:{icono:"🩸",descripcion:"La sangre distribuye glucosa, aminoácidos y lípidos dietarios hacia los tejidos.",combustible:"Transporta, no almacena",senal:"Insulina elevada",aumenta:"Entrega de nutrientes",disminuye:"Concentración de ácidos grasos libres por inhibición de lipólisis",rutas:["Intestino → vena porta → hígado","Quilomicrones → circulación → tejido adiposo y músculo","Páncreas → insulina → órganos diana"],algoritmo:"Estado alimentado → nutrientes en sangre → señal insulinémica → distribución a órganos.",pregunta:"¿Qué vía lleva primero la glucosa intestinal al hígado?",opciones:["Vena porta hepática","Conducto torácico","Arteria pulmonar"],correcta:0,explicacion:"La glucosa absorbida llega al hígado principalmente por la vena porta."},
+higado:{icono:"🫀",descripcion:"El hígado capta glucosa, la utiliza y almacena parte del exceso como glucógeno y lípidos.",combustible:"Glucosa",senal:"Insulina elevada y glucagón relativamente bajo",aumenta:"Glucólisis, glucogénesis y lipogénesis",disminuye:"Gluconeogénesis, glucogenólisis y cetogénesis",rutas:["Glucosa → glucosa-6-fosfato","Glucosa-6-fosfato → glucógeno","Piruvato → acetil-CoA → ácidos grasos"],algoritmo:"Estado alimentado → insulina → hígado → utiliza y almacena glucosa.",pregunta:"¿Qué transportador facilita el intercambio de glucosa en el hepatocito?",opciones:["GLUT2","GLUT4","GLUT5"],correcta:0,explicacion:"El hepatocito expresa principalmente GLUT2."},
+pancreas:{icono:"🟠",descripcion:"Las células beta detectan el aumento de glucosa y secretan insulina.",combustible:"Glucosa",senal:"Aumento de ATP en la célula beta",aumenta:"Secreción de insulina",disminuye:"Secreción relativa de glucagón",rutas:["Glucosa entra a célula beta","Glucocinasa fosforila glucosa","↑ ATP → cierre KATP → Ca²⁺ → exocitosis de insulina"],algoritmo:"Estado alimentado → glucosa elevada → célula beta → insulina.",pregunta:"¿Qué enzima actúa como sensor de glucosa en la célula beta?",opciones:["Glucocinasa","Hexoquinasa II","Fructosa-1,6-bisfosfatasa"],correcta:0,explicacion:"La glucocinasa funciona como sensor metabólico de glucosa en la célula beta."},
+intestino:{icono:"🌀",descripcion:"El intestino absorbe monosacáridos, aminoácidos y lípidos provenientes de la comida.",combustible:"Glucosa, glutamina y otros nutrientes",senal:"Presencia de nutrientes luminales e incretinas",aumenta:"Absorción y transporte hacia sangre y linfa",disminuye:"No corresponde una movilización de reservas",rutas:["Glucosa/galactosa → SGLT1","Fructosa → GLUT5","Monosacáridos → GLUT2 basolateral"],algoritmo:"Comida → digestión → absorción intestinal → distribución sistémica.",pregunta:"¿Qué transportador apical absorbe fructosa?",opciones:["GLUT5","SGLT1","GLUT4"],correcta:0,explicacion:"La fructosa entra al enterocito principalmente por GLUT5."},
+musculo:{icono:"💪",descripcion:"La insulina aumenta la entrada de glucosa y favorece la síntesis de glucógeno y proteínas.",combustible:"Glucosa y ácidos grasos",senal:"Insulina",aumenta:"GLUT4, glucólisis, glucogénesis y síntesis proteica",disminuye:"Proteólisis",rutas:["Insulina → translocación de GLUT4","Glucosa → glucógeno","Glucosa → glucólisis → ATP"],algoritmo:"Estado alimentado → insulina → músculo → capta glucosa y repone reservas.",pregunta:"¿Qué transportador responde a la insulina en músculo?",opciones:["GLUT4","GLUT2","GLUT5"],correcta:0,explicacion:"GLUT4 se transloca a la membrana en respuesta a insulina."},
+adiposo:{icono:"🟡",descripcion:"El tejido adiposo capta glucosa y ácidos grasos para sintetizar triacilglicéridos.",combustible:"Glucosa y ácidos grasos",senal:"Insulina",aumenta:"GLUT4, LPL adiposa y síntesis de triacilglicéridos",disminuye:"Lipólisis sensible a hormonas",rutas:["Glucosa → DHAP → glicerol-3-fosfato","Ácidos grasos + glicerol-3-fosfato → TAG","Insulina → inhibición de lipólisis"],algoritmo:"Estado alimentado → insulina → adipocito → almacena energía como TAG.",pregunta:"¿Qué molécula derivada de glucosa aporta el esqueleto del TAG?",opciones:["Glicerol-3-fosfato","Acetona","Lactato"],correcta:0,explicacion:"El glicerol-3-fosfato aporta el esqueleto para esterificar ácidos grasos."}
+},
+ayuno:{
+resumen:"Al disminuir la glucosa circulante cae la insulina y aumenta la acción de glucagón y otras hormonas contrarreguladoras. Predomina la movilización de reservas.",
+cerebro:{icono:"🧠",descripcion:"En ayuno temprano sigue usando glucosa; en ayuno prolongado aumenta progresivamente el uso de cuerpos cetónicos.",combustible:"Glucosa al inicio; cuerpos cetónicos después",senal:"Disminución de insulina y aumento de cetonas",aumenta:"Uso de cuerpos cetónicos en ayuno prolongado",disminuye:"Dependencia absoluta de glucosa",rutas:["Hígado → cuerpos cetónicos","Cetonas → cerebro → acetil-CoA","Acetil-CoA → ciclo de Krebs → ATP"],algoritmo:"Ayuno → baja insulina → hígado produce cetonas → cerebro adapta su combustible.",pregunta:"¿Qué combustible aumenta en el cerebro durante el ayuno prolongado?",opciones:["Cuerpos cetónicos","Ácidos grasos libres de cadena larga","Glucógeno muscular"],correcta:0,explicacion:"Los cuerpos cetónicos atraviesan la barrera hematoencefálica y aumentan como combustible."},
+sangre:{icono:"🩸",descripcion:"La sangre transporta glucosa hepática, ácidos grasos del adipocito, glicerol y cuerpos cetónicos.",combustible:"Transporta combustibles movilizados",senal:"Glucagón, catecolaminas, cortisol y GH",aumenta:"Ácidos grasos libres, glicerol y cetonas",disminuye:"Insulina",rutas:["Adipocito → ácidos grasos + glicerol","Hígado → glucosa","Hígado → cuerpos cetónicos"],algoritmo:"Ayuno → señales contrarreguladoras → movilización → distribución sanguínea.",pregunta:"¿Qué metabolito liberado por el adipocito sirve para gluconeogénesis?",opciones:["Glicerol","Colesterol","Acetoacetato"],correcta:0,explicacion:"El glicerol llega al hígado y puede incorporarse a gluconeogénesis."},
+higado:{icono:"🫀",descripcion:"El hígado mantiene la glicemia y, si el ayuno se prolonga, produce cuerpos cetónicos.",combustible:"Ácidos grasos para su propia energía",senal:"Glucagón elevado e insulina baja",aumenta:"Glucogenólisis, gluconeogénesis, beta-oxidación y cetogénesis",disminuye:"Glucólisis y lipogénesis",rutas:["Glucógeno → glucosa","Lactato/alanina/glicerol → glucosa","Ácidos grasos → acetil-CoA → cuerpos cetónicos"],algoritmo:"Ayuno → glucagón → hígado → mantiene glucemia y produce cetonas.",pregunta:"¿Qué vía mantiene la glucemia cuando el glucógeno disminuye?",opciones:["Gluconeogénesis","Lipogénesis","Glucogénesis"],correcta:0,explicacion:"La gluconeogénesis aumenta a medida que progresa el ayuno."},
+pancreas:{icono:"🟠",descripcion:"Disminuye la secreción de insulina y aumenta la de glucagón.",combustible:"Glucosa circulante disminuida",senal:"Baja glucosa",aumenta:"Secreción de glucagón por células alfa",disminuye:"Secreción de insulina",rutas:["↓ glucosa → ↓ célula beta","Célula alfa → glucagón","Glucagón → hígado"],algoritmo:"Ayuno → glucosa baja → glucagón → producción hepática de glucosa.",pregunta:"¿Qué hormona aumenta durante el ayuno?",opciones:["Glucagón","Insulina","Incretinas"],correcta:0,explicacion:"El glucagón contribuye a mantener la glicemia durante el ayuno."},
+intestino:{icono:"🌀",descripcion:"En ausencia de comida disminuye la absorción de nutrientes; el intestino mantiene funciones basales.",combustible:"Glutamina y combustibles circulantes",senal:"Ausencia de nutrientes luminales",aumenta:"Complejo motor migratorio",disminuye:"Absorción postprandial",rutas:["Ayuno → menor flujo de nutrientes","Mantenimiento de barrera intestinal","Motilidad interdigestiva"],algoritmo:"Ayuno → no hay absorción significativa → el intestino mantiene homeostasis.",pregunta:"¿Qué ocurre con la absorción de glucosa durante el ayuno?",opciones:["Disminuye por ausencia de glucosa luminal","Aumenta por GLUT4","Se vuelve independiente de nutrientes"],correcta:0,explicacion:"Sin alimento en la luz intestinal disminuye la absorción de glucosa."},
+musculo:{icono:"💪",descripcion:"En reposo disminuye la captación insulinodependiente de glucosa y aumenta el uso de ácidos grasos.",combustible:"Ácidos grasos; puede aportar alanina en ayuno prolongado",senal:"Insulina baja",aumenta:"Oxidación de ácidos grasos",disminuye:"Captación de glucosa por GLUT4 inducida por insulina",rutas:["Ácidos grasos → beta-oxidación","Aminoácidos → alanina","Alanina → hígado → gluconeogénesis"],algoritmo:"Ayuno → insulina baja → músculo conserva glucosa y usa grasas.",pregunta:"¿Qué combustible aumenta en músculo en ayuno?",opciones:["Ácidos grasos","Glucosa postprandial","Quilomicrones intactos"],correcta:0,explicacion:"El músculo aumenta el uso de ácidos grasos en ayuno."},
+adiposo:{icono:"🟡",descripcion:"La baja insulina permite activar la lipólisis y liberar ácidos grasos y glicerol.",combustible:"Utiliza parte de sus propios ácidos grasos",senal:"Insulina baja y catecolaminas",aumenta:"Lipólisis",disminuye:"Síntesis de triacilglicéridos",rutas:["TAG → ácidos grasos + glicerol","Ácidos grasos → tejidos","Glicerol → hígado"],algoritmo:"Ayuno → insulina baja → adipocito → moviliza TAG.",pregunta:"¿Qué enzima reguladora aumenta su actividad durante la lipólisis?",opciones:["Lipasa sensible a hormonas","Glucógeno sintasa","Acetil-CoA carboxilasa"],correcta:0,explicacion:"La lipasa sensible a hormonas participa en la movilización de triacilglicéridos."}
+},
+ejercicio:{
+resumen:"Durante el ejercicio aumenta la demanda de ATP. El músculo ajusta el combustible según intensidad y duración, mientras hígado y adipocito sostienen el aporte energético.",
+cerebro:{icono:"🧠",descripcion:"Mantiene el uso de glucosa y coordina respuestas motoras y autonómicas.",combustible:"Glucosa",senal:"Actividad neuronal y catecolaminas",aumenta:"Consumo energético neuronal",disminuye:"No suele cambiar de combustible en ejercicio breve",rutas:["Glucosa → ATP neuronal","Control motor → contracción muscular","Sistema autónomo → catecolaminas"],algoritmo:"Ejercicio → activación neural → coordinación motora y metabólica.",pregunta:"¿Qué combustible sigue siendo principal en el cerebro durante ejercicio agudo?",opciones:["Glucosa","Ácidos grasos de cadena larga","Glucógeno hepático directo"],correcta:0,explicacion:"El cerebro sigue dependiendo principalmente de glucosa en ejercicio agudo."},
+sangre:{icono:"🩸",descripcion:"Transporta glucosa, lactato, ácidos grasos, oxígeno y hormonas entre los órganos.",combustible:"Distribuye múltiples combustibles",senal:"Catecolaminas y cambios en insulina/glucagón",aumenta:"Flujo hacia músculo activo",disminuye:"Flujo hacia algunos órganos no prioritarios",rutas:["Hígado → glucosa → músculo","Adipocito → ácidos grasos → músculo","Músculo → lactato → hígado"],algoritmo:"Ejercicio → demanda muscular → redistribución sanguínea y de combustibles.",pregunta:"¿Qué metabolito puede viajar del músculo al hígado durante ejercicio intenso?",opciones:["Lactato","Glucógeno","Triacilglicérido intracelular"],correcta:0,explicacion:"El lactato puede llegar al hígado para participar en el ciclo de Cori."},
+higado:{icono:"🫀",descripcion:"Aumenta la producción de glucosa para sostener la glicemia y abastecer al músculo.",combustible:"Ácidos grasos para su propia energía",senal:"Glucagón y catecolaminas",aumenta:"Glucogenólisis y gluconeogénesis",disminuye:"Síntesis de glucógeno durante el esfuerzo",rutas:["Glucógeno hepático → glucosa","Lactato → glucosa","Alanina → glucosa"],algoritmo:"Ejercicio → demanda de glucosa → hígado → libera glucosa.",pregunta:"¿Qué órgano puede exportar glucosa libre durante el ejercicio?",opciones:["Hígado","Músculo esquelético","Tejido adiposo"],correcta:0,explicacion:"El hígado posee glucosa-6-fosfatasa y puede liberar glucosa."},
+pancreas:{icono:"🟠",descripcion:"Durante ejercicio suele disminuir la insulina y aumentar el glucagón, facilitando la movilización de combustibles.",combustible:"Glucosa",senal:"Actividad simpática y demanda energética",aumenta:"Glucagón relativo",disminuye:"Insulina relativa",rutas:["Ejercicio → catecolaminas","↓ insulina → movilización de combustibles","↑ glucagón → producción hepática de glucosa"],algoritmo:"Ejercicio → señales contrarreguladoras → disponibilidad de combustibles.",pregunta:"¿Qué ocurre generalmente con la insulina durante ejercicio moderado?",opciones:["Disminuye","Aumenta marcadamente","Desaparece por completo"],correcta:0,explicacion:"La insulina suele disminuir, aunque el músculo aumenta captación de glucosa por contracción."},
+intestino:{icono:"🌀",descripcion:"Durante ejercicio intenso puede disminuir transitoriamente el flujo sanguíneo intestinal.",combustible:"Nutrientes circulantes",senal:"Redistribución del flujo sanguíneo",aumenta:"No es el órgano prioritario durante el esfuerzo",disminuye:"Flujo esplácnico en ejercicio intenso",rutas:["Ejercicio → vasoconstricción esplácnica","Sangre → músculo activo","Recuperación → normalización"],algoritmo:"Ejercicio → prioridad muscular → menor flujo intestinal relativo.",pregunta:"¿Qué puede ocurrir con el flujo intestinal durante ejercicio intenso?",opciones:["Disminuye","Aumenta siempre","No cambia nunca"],correcta:0,explicacion:"El flujo esplácnico puede disminuir durante ejercicio intenso."},
+musculo:{icono:"💪",descripcion:"La contracción aumenta la demanda de ATP y moviliza glucógeno, glucosa y ácidos grasos según intensidad y duración.",combustible:"ATP-PCr, glucógeno/glucosa y ácidos grasos",senal:"Ca²⁺, AMP/AMPK, catecolaminas y contracción",aumenta:"Glucogenólisis, glucólisis, oxidación y GLUT4 por contracción",disminuye:"Síntesis de reservas durante el esfuerzo",rutas:["PCr → ATP inmediato","Glucógeno → glucólisis","Ácidos grasos → beta-oxidación"],algoritmo:"Ejercicio → demanda de ATP → músculo selecciona combustible según intensidad.",pregunta:"¿Puede GLUT4 llegar a la membrana sin insulina durante ejercicio?",opciones:["Sí, por señal de contracción","No, nunca","Solo en hepatocitos"],correcta:0,explicacion:"La contracción muscular puede estimular translocación de GLUT4 independientemente de insulina."},
+adiposo:{icono:"🟡",descripcion:"En ejercicio prolongado aumenta la lipólisis y libera ácidos grasos para el músculo.",combustible:"Triacilglicéridos almacenados",senal:"Catecolaminas e insulina baja",aumenta:"Lipólisis",disminuye:"Almacenamiento de triacilglicéridos",rutas:["TAG → ácidos grasos + glicerol","Ácidos grasos → músculo","Glicerol → hígado"],algoritmo:"Ejercicio prolongado → catecolaminas → adipocito → libera ácidos grasos.",pregunta:"¿Qué tejido libera ácidos grasos durante ejercicio prolongado?",opciones:["Tejido adiposo","Cerebro","Páncreas"],correcta:0,explicacion:"El tejido adiposo moviliza triacilglicéridos y libera ácidos grasos."}
+}
+};
+
+let estadoActual="alimentado";
+let organoActual="cerebro";
+
+function nombreEstado(e){
+return e==="alimentado"?"Estado alimentado":e==="ayuno"?"Ayuno":"Ejercicio";
+}
+
+function render(){
+const d=datos[estadoActual][organoActual];
+document.getElementById("resumen-estado").textContent=datos[estadoActual].resumen;
+document.getElementById("icono-organo").textContent=d.icono;
+document.getElementById("nombre-organo").textContent=document.querySelector(`[data-organo="${organoActual}"] small`).textContent;
+document.getElementById("estado-organo").textContent=nombreEstado(estadoActual);
+document.getElementById("descripcion").textContent=d.descripcion;
+document.getElementById("combustible").textContent=d.combustible;
+document.getElementById("senal").textContent=d.senal;
+document.getElementById("aumenta").textContent=d.aumenta;
+document.getElementById("disminuye").textContent=d.disminuye;
+document.getElementById("algoritmo").textContent=d.algoritmo;
+document.getElementById("pregunta").textContent=d.pregunta;
+
+const rutas=document.getElementById("lista-rutas");
+rutas.innerHTML="";
+d.rutas.forEach((r,i)=>{
+const div=document.createElement("div");
+div.className="ruta";
+div.innerHTML=`<span>${i+1}</span><span class="flecha">→</span><span>${r}</span>`;
+rutas.appendChild(div);
+});
+
+const opciones=document.getElementById("opciones");
+opciones.innerHTML="";
+d.opciones.forEach((o,i)=>{
+const label=document.createElement("label");
+label.className="opcion";
+label.innerHTML=`<input type="radio" name="pregunta-rapida" value="${i}"> ${o}`;
+opciones.appendChild(label);
+});
+const boton=document.createElement("button");
+boton.type="button";
+boton.textContent="Comprobar";
+boton.style.cssText="margin-top:10px;background:#76518f;color:white;border:none;border-radius:10px;padding:10px 16px;font-weight:bold;cursor:pointer";
+boton.addEventListener("click",()=>{
+const sel=document.querySelector('input[name="pregunta-rapida"]:checked');
+const retro=document.getElementById("retro");
+if(!sel){retro.className="retro incorrecta";retro.textContent="Selecciona una alternativa.";retro.style.display="block";return}
+if(Number(sel.value)===d.correcta){retro.className="retro correcta";retro.textContent="✅ "+d.explicacion}
+else{retro.className="retro incorrecta";retro.textContent="❌ "+d.explicacion}
+retro.style.display="block";
+});
+opciones.appendChild(boton);
+document.getElementById("retro").style.display="none";
+
+document.querySelectorAll(".organo").forEach(b=>b.classList.toggle("activo",b.dataset.organo===organoActual));
+document.querySelectorAll(".boton-estado").forEach(b=>b.classList.toggle("activo",b.dataset.estado===estadoActual));
+}
+
+document.querySelectorAll(".boton-estado").forEach(b=>{
+b.addEventListener("click",()=>{estadoActual=b.dataset.estado;render()});
+});
+document.querySelectorAll(".organo").forEach(b=>{
+b.addEventListener("click",()=>{organoActual=b.dataset.organo;render()});
+});
+
+render();
+</script>
+</body>
+</html>

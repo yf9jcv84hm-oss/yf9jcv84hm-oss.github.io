@@ -1,0 +1,18 @@
+ACTUALIZACIÓN DE LA RUTA DE AYUNO
+
+Contenido del paquete:
+- menu-ayuno.html (reemplaza el menú actual)
+- fundamentos-ayuno.html
+- integracion-ayuno.html
+- casos-ayuno.html
+- paciente-virtual-ayuno.html
+- atlas-metabolico.html y red-comunicacion-organos.html (actualizados para abrir en modo Ayuno y volver al módulo)
+
+Instalación:
+1. Descomprime este paquete dentro de tu carpeta AcademiaMetabolismo.
+2. Acepta reemplazar menu-ayuno.html, atlas-metabolico.html y red-comunicacion-organos.html.
+3. Agrega las cuatro páginas nuevas junto a los demás archivos HTML.
+4. Conserva las demás páginas, imágenes y carpetas del sitio.
+5. Abre unidades.html, entra en Ayuno y prueba los cuatro módulos y los enlaces al Atlas y a la Red.
+
+El avance de cada módulo se guarda en el navegador del estudiante (localStorage) y la medalla se activa al completar los cuatro.

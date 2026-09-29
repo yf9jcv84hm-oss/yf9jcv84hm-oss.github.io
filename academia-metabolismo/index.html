@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Academia Metabolismo: recursos interactivos para comprender la integración del metabolismo energético.">
+  <title>Academia Metabolismo | Viviana Torres</title>
+  <style>
+    :root{--ink:#17313a;--muted:#5e7078;--accent:#1f6177;--line:#d9e6e9;--bg:#f4f8f9;--paper:#fff;--soft:#eaf3f5}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+    a{color:inherit}
+    .shell{width:min(1080px,calc(100% - 36px));margin:auto}
+    header{background:rgba(255,255,255,.94);border-bottom:1px solid var(--line)}
+    nav{min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{font-weight:800;color:var(--accent);letter-spacing:-.02em}
+    .back{color:var(--muted);text-decoration:none;font-weight:650}
+    .hero{padding:72px 0 56px;background:radial-gradient(circle at 85% 20%,rgba(139,183,197,.28),transparent 28%),linear-gradient(180deg,#fbfdfe 0%,var(--bg) 100%)}
+    .eyebrow{color:var(--accent);text-transform:uppercase;font-size:.8rem;font-weight:800;letter-spacing:.13em}
+    h1{font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.05;letter-spacing:-.05em;margin:12px 0}
+    .lead{font-size:1.2rem;color:var(--muted);max-width:760px}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+    .button{display:inline-block;text-decoration:none;background:var(--accent);color:#fff;padding:12px 18px;border-radius:10px;font-weight:750}
+    .button.secondary{background:var(--soft);color:var(--accent);border:1px solid #cfe0e5}
+    section{padding:52px 0}
+    h2{font-size:2rem;margin:0 0 8px;letter-spacing:-.03em}
+    .intro{color:var(--muted);margin:0 0 24px}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 8px 24px rgba(26,61,74,.06)}
+    .icon{font-size:2rem}
+    .card h3{margin:8px 0;color:var(--accent)}
+    .card p{color:var(--muted);min-height:52px}
+    .card a{display:inline-block;margin-top:5px;color:var(--accent);font-weight:750;text-decoration:none}
+    .card a:hover,.back:hover{text-decoration:underline}
+    footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
+    @media(max-width:650px){.hero{padding:52px 0 40px}.grid{grid-template-columns:1fr}.card p{min-height:0}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell">
+      <nav aria-label="Navegación principal">
+        <div class="brand">🧬 Academia Metabolismo</div>
+        <a class="back" href="../index.html">← Sitio de Viviana Torres</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="shell">
+        <div class="eyebrow">Bioquímica · Fisiología · Aprendizaje interactivo</div>
+        <h1>Comprender el metabolismo como una red integrada.</h1>
+        <p class="lead">Explora cómo el estado nutricional modifica el uso de combustibles, la producción de energía y la comunicación entre órganos.</p>
+        <div class="actions">
+          <a class="button" href="unidades.html">Explorar las unidades</a>
+          <a class="button secondary" href="menu-alimentado.html">Comenzar por el estado alimentado</a>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="shell">
+        <h2>Rutas de aprendizaje</h2>
+        <p class="intro">Elige una ruta o explora las herramientas que conectan los procesos metabólicos entre tejidos.</p>
+        <div class="grid">
+          <article class="card"><div class="icon">🍽️</div><h3>Estado alimentado</h3><p>Estudia cómo se utilizan y almacenan los nutrientes después de una comida.</p><a href="menu-alimentado.html">Abrir la ruta →</a></article>
+          <article class="card"><div class="icon">🌙</div><h3>Ayuno</h3><p>Recorre los cambios metabólicos desde el ayuno inicial hasta una respuesta integrada.</p><a href="menu-ayuno.html">Abrir la ruta →</a></article>
+          <article class="card"><div class="icon">🏃</div><h3>Ejercicio</h3><p>Explora la respuesta de los órganos con el atlas y la red metabólica; los módulos específicos están en preparación.</p><a href="menu-ejercicio.html">Explorar recursos →</a></article>
+          <article class="card"><div class="icon">🔄</div><h3>Integración y comparación</h3><p>Usa herramientas interactivas para seguir combustibles y señales entre órganos.</p><a href="menu-casos.html">Explorar herramientas →</a></article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer><div class="shell">Academia Metabolismo · Recursos de aprendizaje para bioquímica y fisiología.</div></footer>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ruta de aprendizaje: Ayuno</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:#f3f7f6;margin:0;color:#243238}
+.contenedor{max-width:1120px;margin:auto;padding:35px 20px 55px}
+.encabezado{text-align:center;margin-bottom:35px}
+.encabezado h1{color:#1e6f8b;font-size:43px;margin:10px 0}
+.encabezado p{max-width:800px;margin:auto;color:#555;font-size:20px;line-height:1.55}
+.etiqueta-principal{display:inline-block;background:#f6ead5;color:#8a6827;padding:8px 16px;border-radius:22px;font-weight:bold}
+.seccion{background:#fff;border-radius:20px;padding:32px;margin-bottom:28px;box-shadow:0 5px 18px rgba(0,0,0,.08)}
+.titulo-seccion{display:flex;align-items:center;gap:13px;margin-bottom:12px}
+.numero{width:43px;height:43px;border-radius:50%;background:#1e6f8b;color:#fff;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:bold}
+h2,h3{color:#1e6f8b}
+.introduccion{color:#555;font-size:18px;line-height:1.55}
+.mapa{text-align:center;background:#f7faf9;border:2px solid #dbe7e5;border-radius:18px;padding:25px}
+.caja{display:inline-block;min-width:220px;background:#fff;border:2px solid #d7bd7d;border-radius:13px;padding:13px 20px;font-weight:bold}
+.hormona{background:#f6ead5;color:#8a6827}
+.flecha{font-size:28px;color:#1e6f8b;margin:7px}
+.organos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.organo{background:#fff;border:2px solid #dbe5e3;border-radius:16px;padding:20px;text-align:center}
+.algoritmo{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.paso{background:#f7faf9;border:2px solid #dbe7e5;border-radius:16px;padding:19px}
+.paso b{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;background:#d39a2b;color:#fff;border-radius:50%}
+.ejemplo{display:block;margin-top:12px;background:#f6ead5;color:#8a6827;border-radius:9px;padding:9px;font-weight:bold}
+.herramientas{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.herramienta{background:linear-gradient(135deg,#fffaf0,#edf5fa);border:2px solid #d9dfdc;border-radius:18px;padding:24px;text-align:center}
+.herramienta .icono{font-size:50px}
+.boton{display:inline-block;text-align:center;background:#2e8b57;color:#fff;text-decoration:none;border:none;border-radius:12px;padding:14px 18px;font-weight:bold;font-size:16px;margin-top:12px;cursor:pointer}
+.boton-morado{background:#76518f}
+.practicas{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.tarjeta{background:#fff;border:2px solid #dbe5e3;border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;min-height:310px}
+.estado{display:inline-block;padding:7px 12px;border-radius:18px;font-size:14px;font-weight:bold;background:#f3ead8;color:#8a6827}
+.progreso{height:12px;background:#e1e8e7;border-radius:12px;overflow:hidden;margin:12px 0}
+.relleno{height:100%;background:#d39a2b;width:0}
+.resultado{font-weight:bold;color:#1e6f8b}
+.deshabilitado{background:#aeb8b5;cursor:not-allowed;pointer-events:none}
+.estado.completo{background:#e3f4e8;color:#205f35}
+.estado.en-progreso{background:#eaf3f5;color:#1e5264}
+.relleno{transition:width .3s ease}
+.medalla.desbloqueada{filter:none;opacity:1}
+.aviso{background:#fff8e7;border-left:6px solid #d39a2b;border-radius:12px;padding:16px;margin-top:22px;line-height:1.55}
+.logro{text-align:center;background:linear-gradient(135deg,#fffaf0,#edf5fa)}
+.medalla{font-size:70px;filter:grayscale(1);opacity:.45}
+.volver{color:#1e6f8b;text-decoration:none;font-weight:bold}
+@media(max-width:850px){.algoritmo{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.practicas,.organos,.algoritmo,.herramientas{grid-template-columns:1fr}.contenedor{padding:25px 14px}.seccion{padding:23px 18px}}
+</style>
+</head>
+<body>
+<main class="contenedor">
+
+<header class="encabezado">
+<span class="etiqueta-principal">Ruta de aprendizaje</span>
+<h1>🌙 Ayuno</h1>
+<p>Aprende a razonar cómo el organismo mantiene la glicemia, moviliza reservas y cambia progresivamente de combustible cuando no ingresan nutrientes desde el intestino.</p>
+</header>
+
+<section class="seccion">
+<div class="titulo-seccion"><div class="numero">1</div><h2>Mapa conceptual</h2></div>
+<div class="mapa">
+<div class="caja">🌙 Ausencia de ingesta</div>
+<div class="flecha">↓</div>
+<div class="caja">↓ Insulina; glicemia sostenida</div>
+<div class="flecha">↓</div>
+<div class="caja hormona">↑ Glucagón y hormonas contrarreguladoras</div>
+<div class="flecha">↓</div>
+<div class="organos">
+<div class="organo"><h3>🫀 Hígado</h3><p>↑ Glucogenólisis</p><p>↑ Gluconeogénesis</p><p>↑ Cetogénesis</p></div>
+<div class="organo"><h3>💪 Músculo</h3><p>↑ Oxidación de ácidos grasos</p><p>↓ Captación de glucosa</p><p>Puede liberar alanina</p></div>
+<div class="organo"><h3>🟡 Tejido adiposo</h3><p>↑ Lipólisis</p><p>↑ Ácidos grasos</p><p>↑ Glicerol</p></div>
+</div>
+</div>
+</section>
+
+<section class="seccion">
+<div class="titulo-seccion"><div class="numero">2</div><h2>Algoritmo de razonamiento</h2></div>
+<p class="introduccion">Resuelve cada problema siguiendo las mismas cuatro preguntas usadas en Estado alimentado.</p>
+<div class="algoritmo">
+<div class="paso"><b>1</b><h3>¿Cuál es el estado?</h3><p>Determina cuánto tiempo ha pasado desde la última comida.</p><span class="ejemplo">Ayuno temprano o prolongado</span></div>
+<div class="paso"><b>2</b><h3>¿Qué señal predomina?</h3><p>Identifica la relación hormonal dominante.</p><span class="ejemplo">Insulina baja, glucagón alto</span></div>
+<div class="paso"><b>3</b><h3>¿Qué órgano?</h3><p>Localiza el tejido que produce, utiliza o transporta el combustible.</p><span class="ejemplo">Hígado, músculo o adipocito</span></div>
+<div class="paso"><b>4</b><h3>¿Moviliza o conserva?</h3><p>Decide si el órgano libera reservas, produce glucosa o cambia de combustible.</p><span class="ejemplo">Moviliza y redistribuye</span></div>
+</div>
+</section>
+
+
+<section class="seccion">
+<div class="titulo-seccion"><div class="numero">3</div><h2>Entrenamiento y progreso</h2></div>
+<p class="introduccion">Completa los cuatro módulos para integrar los cambios hormonales, las rutas y la coordinación entre órganos. Puedes volver a cualquiera para repasar.</p>
+<div class="practicas">
+<article class="tarjeta" data-modulo="fundamentos">
+<div><div style="font-size:42px">📘</div><span class="estado" id="estado-fundamentos">Por iniciar</span><h3>Fundamentos del ayuno</h3><p>Insulina, glucagón, glucogenólisis, gluconeogénesis y lipólisis.</p><div class="progreso" role="progressbar" aria-label="Progreso: Fundamentos del ayuno" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="relleno" id="barra-fundamentos"></div></div><p class="resultado" id="resultado-fundamentos">0% completado</p></div>
+<a class="boton" href="fundamentos-ayuno.html">Comenzar fundamentos</a>
+</article>
+<article class="tarjeta" data-modulo="integracion">
+<div><div style="font-size:42px">🫀</div><span class="estado" id="estado-integracion">Por iniciar</span><h3>Integración entre órganos</h3><p>Intercambio de combustibles entre hígado, adiposo, músculo, cerebro y eritrocito.</p><div class="progreso" role="progressbar" aria-label="Progreso: Integración entre órganos" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="relleno" id="barra-integracion"></div></div><p class="resultado" id="resultado-integracion">0% completado</p></div>
+<a class="boton" href="integracion-ayuno.html">Comenzar integración</a>
+</article>
+<article class="tarjeta" data-modulo="casos">
+<div><div style="font-size:42px">🩺</div><span class="estado" id="estado-casos">Por iniciar</span><h3>Casos integradores</h3><p>Compara ayuno nocturno, cerca de 24 horas y ayuno prolongado.</p><div class="progreso" role="progressbar" aria-label="Progreso: Casos integradores" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="relleno" id="barra-casos"></div></div><p class="resultado" id="resultado-casos">0% completado</p></div>
+<a class="boton" href="casos-ayuno.html">Resolver casos</a>
+</article>
+<article class="tarjeta" data-modulo="paciente">
+<div><div style="font-size:42px">🧑‍⚕️</div><span class="estado" id="estado-paciente">Por iniciar</span><h3>Paciente virtual</h3><p>Integra las rutas y predice la respuesta metabólica en un caso hipotético.</p><div class="progreso" role="progressbar" aria-label="Progreso: Paciente virtual" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="relleno" id="barra-paciente"></div></div><p class="resultado" id="resultado-paciente">0% completado</p></div>
+<a class="boton" href="paciente-virtual-ayuno.html">Entrar al laboratorio</a>
+</article>
+</div>
+<div class="aviso" id="estado-ruta" aria-live="polite">El logro se desbloqueará al completar los cuatro módulos. El avance se guarda en este navegador.</div>
+</section>
+<section class="seccion logro">
+<div class="medalla" id="medalla">🏅</div>
+<h2 id="titulo-logro">Logro bloqueado</h2>
+<p id="texto-logro">Se desbloqueará al completar los cuatro módulos de la ruta de Ayuno.</p>
+</section>
+
+<a class="volver" href="unidades.html">← Volver a las unidades</a>
+</main>
+<script>
+const modulosAyuno=["fundamentos","integracion","casos","paciente"];
+function leerProgreso(id){try{return JSON.parse(localStorage.getItem("academiaAyuno_"+id)||"null")}catch(e){return null}}
+function actualizarProgreso(){let listos=0;modulosAyuno.forEach(function(id){const datos=leerProgreso(id);const card=document.querySelector('[data-modulo="'+id+'"]');const estado=document.getElementById("estado-"+id);const barra=document.getElementById("barra-"+id);const resultado=document.getElementById("resultado-"+id);const progreso=datos&&datos.completo?100:0;barra.style.width=progreso+"%";card.querySelector('[role="progressbar"]').setAttribute("aria-valuenow",String(progreso));if(progreso){listos++;estado.textContent="Completado";estado.className="estado completo";resultado.textContent="Puntaje: "+datos.puntaje+"/"+datos.total; }else{estado.textContent="Por iniciar";estado.className="estado";resultado.textContent="0% completado";}});const aviso=document.getElementById("estado-ruta");aviso.textContent="Progreso: "+listos+" de 4 módulos completados. "+(listos===4?"¡Ruta de Ayuno completada!":"El logro se desbloqueará al completar los cuatro módulos.");if(listos===4){document.getElementById("medalla").classList.add("desbloqueada");document.getElementById("titulo-logro").textContent="¡Ruta de Ayuno completada!";document.getElementById("texto-logro").textContent="Completaste los fundamentos, la integración entre órganos, los casos y el paciente virtual."}}
+actualizarProgreso();
+</script>
+</body>
+</html>

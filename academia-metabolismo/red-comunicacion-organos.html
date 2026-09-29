@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Red de comunicación entre órganos | Academia de Metabolismo</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f7f6;color:#243238}
+.contenedor{max-width:1200px;margin:auto;padding:32px 18px 55px}.encabezado{text-align:center;margin-bottom:26px}
+.encabezado h1{color:#1e6f8b;font-size:42px;margin:8px 0}.encabezado p{max-width:850px;margin:auto;color:#566;font-size:19px;line-height:1.55}
+.etiqueta{display:inline-block;background:#e8dcf3;color:#6a4589;padding:8px 16px;border-radius:22px;font-weight:bold}
+.controles,.red,.panel{background:#fff;border-radius:18px;padding:20px;box-shadow:0 5px 18px rgba(0,0,0,.08)}
+.controles{margin-bottom:22px}.controles h2,.red h2,.panel h2{color:#1e6f8b;margin-top:0}
+.fila{display:flex;gap:10px;flex-wrap:wrap}.boton{border:2px solid #cfdcda;background:#fff;color:#365158;border-radius:22px;padding:10px 15px;font-weight:bold;cursor:pointer}
+.boton.activo{background:#2e8b57;color:#fff;border-color:#2e8b57}.filtro.activo{background:#1e6f8b;border-color:#1e6f8b}
+.resumen{margin-top:15px;padding:14px;border-radius:12px;background:#edf5fa;border-left:6px solid #1e6f8b;line-height:1.5}
+.area{display:grid;grid-template-columns:1fr 350px;gap:22px;align-items:start}.red h2{text-align:center}
+.canvas{position:relative;min-height:700px;background:linear-gradient(180deg,#f9fbfa,#edf5f2);border-radius:18px;overflow:hidden;border:1px solid #dce7e5}
+svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.linea{fill:none;stroke-width:4;stroke-linecap:round;stroke-dasharray:10 12;animation:mover 1.2s linear infinite;opacity:.92}
+@keyframes mover{to{stroke-dashoffset:-44}}.nodo{position:absolute;width:126px;min-height:95px;border:3px solid #b9cfca;background:#fff;border-radius:18px;padding:11px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.12);cursor:pointer;z-index:2}
+.nodo.activo{border-color:#2e8b57;background:#e7f5ec}.nodo .icono{font-size:34px}.nodo strong{display:block;color:#1e6f8b}.nodo small{display:block;color:#5f6c70;margin-top:4px}
+#intestino{left:50%;top:20px;transform:translateX(-50%)}#pancreas{left:50%;top:155px;transform:translateX(-50%)}#higado{left:70px;top:245px}
+#sangre{left:50%;top:335px;transform:translateX(-50%);border-radius:50%;width:145px;height:145px;padding-top:23px}
+#musculo{right:70px;top:245px}#adiposo{left:80px;bottom:42px}#cerebro{right:80px;bottom:42px}
+.etiqueta-flujo{position:absolute;background:#fff;border:2px solid #d7e2e0;border-radius:16px;padding:5px 9px;font-size:12px;font-weight:bold;z-index:3;pointer-events:none}
+.tarjeta{background:#f7faf9;border:1px solid #dce7e5;border-radius:13px;padding:14px;margin:12px 0}.tarjeta h3{color:#1e6f8b;margin:0 0 7px;font-size:17px}.tarjeta p{margin:0;line-height:1.45}
+.lista{padding-left:20px}.lista li{margin:7px 0}.clave{background:#fff8e7;border-left:6px solid #d39a2b;border-radius:12px;padding:14px;line-height:1.5}
+.volver{display:inline-block;margin-top:24px;color:#1e6f8b;text-decoration:none;font-weight:bold}
+.glucosa{stroke:#2d7dd2}.acidos{stroke:#d17b0f}.insulina{stroke:#7a4fa3}.lactato{stroke:#b94747}.glicerol{stroke:#4d8f54}.cetonas{stroke:#6b6b6b}.aminoacidos{stroke:#c05d9c}
+@media(max-width:950px){.area{grid-template-columns:1fr}}@media(max-width:650px){.canvas{min-height:760px}.nodo{width:110px}#higado{left:14px}#musculo{right:14px}#adiposo{left:18px}#cerebro{right:18px}.encabezado h1{font-size:34px}}
+</style>
+</head>
+<body>
+<main class="contenedor">
+<header class="encabezado"><span class="etiqueta">Integración sistémica</span><h1>🔄 Red de comunicación entre órganos</h1><p>Sigue el viaje de hormonas y metabolitos entre los órganos durante el estado alimentado, el ayuno y el ejercicio.</p></header>
+
+<section class="controles">
+<h2>1. Estado fisiológico</h2>
+<div class="fila"><button class="boton estado activo" data-estado="alimentado">🍽️ Alimentado</button><button class="boton estado" data-estado="ayuno">🌙 Ayuno</button><button class="boton estado" data-estado="ejercicio">🏃 Ejercicio</button></div>
+<h2 style="margin-top:18px">2. Señal que deseas seguir</h2>
+<div class="fila"><button class="boton filtro activo" data-filtro="todos">Todos</button><button class="boton filtro" data-filtro="glucosa">Glucosa</button><button class="boton filtro" data-filtro="insulina">Insulina</button><button class="boton filtro" data-filtro="acidos">Ácidos grasos</button><button class="boton filtro" data-filtro="lactato">Lactato</button><button class="boton filtro" data-filtro="glicerol">Glicerol</button><button class="boton filtro" data-filtro="cetonas">Cetonas</button><button class="boton filtro" data-filtro="aminoacidos">Aminoácidos</button></div>
+<div class="resumen" id="resumen"></div>
+</section>
+
+<div class="area">
+<section class="red"><h2>Mapa dinámico</h2><div class="canvas" id="canvas">
+<svg viewBox="0 0 800 700" preserveAspectRatio="none"><defs>
+<marker id="flecha-glucosa" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#2d7dd2"/></marker>
+<marker id="flecha-acidos" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#d17b0f"/></marker>
+<marker id="flecha-insulina" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#7a4fa3"/></marker>
+<marker id="flecha-lactato" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#b94747"/></marker>
+<marker id="flecha-glicerol" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#4d8f54"/></marker>
+<marker id="flecha-cetonas" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#6b6b6b"/></marker>
+<marker id="flecha-aminoacidos" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#c05d9c"/></marker>
+</defs></svg>
+<div class="nodo" id="intestino" data-organo="intestino"><div class="icono">🌀</div><strong>Intestino</strong><small>Absorbe nutrientes</small></div>
+<div class="nodo" id="pancreas" data-organo="pancreas"><div class="icono">🟠</div><strong>Páncreas</strong><small>Señales hormonales</small></div>
+<div class="nodo" id="higado" data-organo="higado"><div class="icono">🫀</div><strong>Hígado</strong><small>Regula glicemia</small></div>
+<div class="nodo" id="sangre" data-organo="sangre"><div class="icono">🩸</div><strong>Sangre</strong><small>Distribuye señales</small></div>
+<div class="nodo" id="musculo" data-organo="musculo"><div class="icono">💪</div><strong>Músculo</strong><small>Produce ATP</small></div>
+<div class="nodo" id="adiposo" data-organo="adiposo"><div class="icono">🟡</div><strong>Adiposo</strong><small>Almacena o moviliza</small></div>
+<div class="nodo" id="cerebro" data-organo="cerebro"><div class="icono">🧠</div><strong>Cerebro</strong><small>Demanda continua</small></div>
+</div></section>
+
+<aside class="panel"><h2 id="titulo">Visión general</h2>
+<div class="tarjeta"><h3>Qué recibe</h3><p id="recibe">Haz clic sobre un órgano.</p></div>
+<div class="tarjeta"><h3>Qué entrega</h3><p id="entrega">—</p></div>
+<div class="tarjeta"><h3>Función en este estado</h3><p id="funcion">—</p></div>
+<div class="tarjeta"><h3>Flujos visibles</h3><ul class="lista" id="lista"></ul></div>
+<div class="clave"><strong>Idea central:</strong><div id="idea"></div></div>
+</aside></div>
+<a class="volver" id="volver" href="unidades.html">← Volver a Unidades de aprendizaje</a>
+</main>
+
+<script>
+const estados={
+alimentado:{resumen:"Después de una comida, el intestino aporta nutrientes y el páncreas libera insulina. Hígado, músculo y tejido adiposo utilizan y almacenan.",idea:"La insulina coordina una red de captación y almacenamiento.",organos:{
+intestino:["Alimento digerido","Glucosa y aminoácidos","Absorber nutrientes"],pancreas:["Glucosa e incretinas","Insulina","Detectar abundancia"],higado:["Glucosa portal e insulina","Metabolitos procesados","Usar glucosa y formar glucógeno"],sangre:["Nutrientes y hormonas","Señales hacia tejidos","Conectar órganos"],musculo:["Glucosa, aminoácidos e insulina","Productos metabólicos","Captar glucosa y formar glucógeno"],adiposo:["Glucosa, ácidos grasos e insulina","Muy pocos ácidos grasos","Almacenar triacilglicéridos"],cerebro:["Glucosa","Señales nerviosas","Oxidar glucosa"]},
+flujos:[["intestino","sangre","glucosa","Glucosa"],["intestino","sangre","aminoacidos","Aminoácidos"],["pancreas","sangre","insulina","Insulina"],["sangre","higado","glucosa","Glucosa portal"],["sangre","musculo","glucosa","Glucosa"],["sangre","adiposo","glucosa","Glucosa"],["sangre","cerebro","glucosa","Glucosa"],["sangre","musculo","insulina","Insulina"],["sangre","adiposo","insulina","Insulina"],["sangre","higado","insulina","Insulina"],["sangre","adiposo","acidos","Ácidos grasos"]]},
+ayuno:{resumen:"Disminuye la insulina. El adipocito libera ácidos grasos y glicerol; el hígado mantiene la glicemia y produce cetonas.",idea:"El ayuno transforma la red en un sistema de movilización de reservas.",organos:{
+intestino:["No recibe alimento","Sin aporte exógeno","Mantener funciones basales"],pancreas:["Menor glucosa","Más glucagón y menos insulina","Señalizar escasez"],higado:["Glicerol, alanina, lactato y ácidos grasos","Glucosa y cetonas","Mantener glicemia"],sangre:["Combustibles movilizados","Combustibles hacia tejidos","Redistribuir reservas"],musculo:["Ácidos grasos","Alanina","Ahorrar glucosa"],adiposo:["Baja insulina y catecolaminas","Ácidos grasos y glicerol","Movilizar TAG"],cerebro:["Glucosa y luego cetonas","Señales nerviosas","Adaptarse al ayuno"]},
+flujos:[["adiposo","sangre","acidos","Ácidos grasos"],["adiposo","sangre","glicerol","Glicerol"],["sangre","higado","glicerol","Glicerol"],["musculo","sangre","aminoacidos","Alanina"],["sangre","higado","aminoacidos","Alanina"],["higado","sangre","glucosa","Glucosa"],["higado","sangre","cetonas","Cetonas"],["sangre","cerebro","glucosa","Glucosa"],["sangre","cerebro","cetonas","Cetonas"],["sangre","musculo","acidos","Ácidos grasos"]]},
+ejercicio:{resumen:"El músculo aumenta su demanda de ATP. El hígado libera glucosa, el adipocito aporta ácidos grasos y el músculo devuelve lactato y alanina.",idea:"La red prioriza al músculo activo y conserva la glicemia.",organos:{
+intestino:["Menor flujo relativo","Pocos nutrientes","Mantener funciones esenciales"],pancreas:["Señales autonómicas","Menos insulina y más glucagón","Facilitar movilización"],higado:["Lactato, alanina y glicerol","Glucosa","Sostener glicemia"],sangre:["Glucosa, ácidos grasos y lactato","Combustibles al músculo","Aumentar intercambio"],musculo:["Glucosa y ácidos grasos","Lactato y alanina","Producir ATP"],adiposo:["Catecolaminas","Ácidos grasos y glicerol","Apoyar ejercicio prolongado"],cerebro:["Glucosa y oxígeno","Señales motoras","Coordinar movimiento"]},
+flujos:[["higado","sangre","glucosa","Glucosa"],["sangre","musculo","glucosa","Glucosa"],["adiposo","sangre","acidos","Ácidos grasos"],["sangre","musculo","acidos","Ácidos grasos"],["musculo","sangre","lactato","Lactato"],["sangre","higado","lactato","Lactato"],["musculo","sangre","aminoacidos","Alanina"],["sangre","higado","aminoacidos","Alanina"],["adiposo","sangre","glicerol","Glicerol"],["sangre","higado","glicerol","Glicerol"],["sangre","cerebro","glucosa","Glucosa"]]}
+};
+const parametros=new URLSearchParams(window.location.search);
+let estado=["alimentado","ayuno","ejercicio"].includes(parametros.get("estado"))?parametros.get("estado"):"alimentado",filtro="todos",organo=null;
+const retornoRed=["unidades.html","menu-ayuno.html","integracion-ayuno.html","mapa-interactivo-cuerpo.html"].includes(parametros.get("volver"))?parametros.get("volver"):"unidades.html";
+const enlaceVolverRed=document.getElementById("volver");enlaceVolverRed.href=retornoRed;enlaceVolverRed.textContent=retornoRed==="integracion-ayuno.html"?"← Volver a Integración entre órganos":retornoRed==="menu-ayuno.html"?"← Volver a la ruta de Ayuno":retornoRed==="mapa-interactivo-cuerpo.html"?"← Volver al mapa interactivo":"← Volver a Unidades de aprendizaje";
+const nombres={intestino:"Intestino",pancreas:"Páncreas",higado:"Hígado",sangre:"Sangre",musculo:"Músculo",adiposo:"Tejido adiposo",cerebro:"Cerebro"};
+function centro(el){const c=document.getElementById("canvas").getBoundingClientRect(),r=el.getBoundingClientRect();return{x:(r.left-c.left+r.width/2)/c.width*800,y:(r.top-c.top+r.height/2)/c.height*700}}
+function dibujar(){const svg=document.querySelector("svg");svg.querySelectorAll(".flujo").forEach(x=>x.remove());document.querySelectorAll(".etiqueta-flujo").forEach(x=>x.remove());
+const visibles=estados[estado].flujos.filter(f=>filtro==="todos"||f[2]===filtro);visibles.forEach((f,i)=>{const a=centro(document.getElementById(f[0])),b=centro(document.getElementById(f[1]));let dx=b.x-a.x,dy=b.y-a.y,l=Math.hypot(dx,dy)||1,ux=dx/l,uy=dy/l,sx=a.x+ux*58,sy=a.y+uy*48,ex=b.x-ux*62,ey=b.y-uy*52,curva=(i%2? -1:1)*32,cx=(sx+ex)/2-uy*curva,cy=(sy+ey)/2+ux*curva;
+const p=document.createElementNS("http://www.w3.org/2000/svg","path");p.setAttribute("d",`M ${sx} ${sy} Q ${cx} ${cy} ${ex} ${ey}`);p.setAttribute("class",`flujo linea ${f[2]}`);p.setAttribute("marker-end",`url(#flecha-${f[2]})`);svg.appendChild(p);
+const e=document.createElement("div");e.className="etiqueta-flujo";e.textContent=f[3];e.style.left=(cx/800*100)+"%";e.style.top=(cy/700*100)+"%";document.getElementById("canvas").appendChild(e)});
+actualizar(visibles)}
+function actualizar(visibles){const e=estados[estado];document.getElementById("resumen").textContent=e.resumen;document.getElementById("idea").textContent=e.idea;const ul=document.getElementById("lista");ul.innerHTML="";visibles.forEach(f=>{const li=document.createElement("li");li.textContent=`${nombres[f[0]]} → ${nombres[f[1]]}: ${f[3]}`;ul.appendChild(li)});
+if(!organo){document.getElementById("titulo").textContent="Visión general";document.getElementById("recibe").textContent="Haz clic sobre un órgano.";document.getElementById("entrega").textContent="—";document.getElementById("funcion").textContent="—";return}const d=e.organos[organo];document.getElementById("titulo").textContent=nombres[organo];document.getElementById("recibe").textContent=d[0];document.getElementById("entrega").textContent=d[1];document.getElementById("funcion").textContent=d[2]}
+document.querySelectorAll(".estado").forEach(b=>b.addEventListener("click",()=>{estado=b.dataset.estado;document.querySelectorAll(".estado").forEach(x=>x.classList.toggle("activo",x===b));organo=null;document.querySelectorAll(".nodo").forEach(n=>n.classList.remove("activo"));dibujar()}));
+document.querySelectorAll(".filtro").forEach(b=>b.addEventListener("click",()=>{filtro=b.dataset.filtro;document.querySelectorAll(".filtro").forEach(x=>x.classList.toggle("activo",x===b));dibujar()}));
+document.querySelectorAll(".nodo").forEach(n=>n.addEventListener("click",()=>{organo=n.dataset.organo;document.querySelectorAll(".nodo").forEach(x=>x.classList.toggle("activo",x===n));actualizar(estados[estado].flujos.filter(f=>filtro==="todos"||f[2]===filtro))}));
+document.querySelectorAll(".estado").forEach(b=>b.classList.toggle("activo",b.dataset.estado===estado));
+window.addEventListener("resize",()=>setTimeout(dibujar,120));setTimeout(dibujar,150);
+</script>
+</body></html>

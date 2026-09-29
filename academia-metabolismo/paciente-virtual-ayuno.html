@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Paciente virtual | Academia de Metabolismo</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:Arial,sans-serif;background:#f3f7f6;margin:0;color:#243238;line-height:1.55}.contenedor{max-width:1080px;margin:auto;padding:32px 20px 54px}.encabezado{text-align:center;margin:8px auto 28px}.encabezado h1{color:#1e6f8b;font-size:clamp(30px,5vw,42px);margin:12px 0}.encabezado p{max-width:850px;margin:auto;color:#555;font-size:18px}.etiqueta{display:inline-block;background:#f6ead5;color:#8a6827;padding:7px 15px;border-radius:22px;font-weight:bold}.seccion{background:#fff;border-radius:18px;padding:26px;margin:22px 0;box-shadow:0 5px 18px rgba(0,0,0,.07)}h2,h3{color:#1e6f8b;margin-top:0}.seccion h2{font-size:24px}.seccion p{line-height:1.6}.rejilla{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.tarjeta{background:#f8faf9;border:1px solid #dbe7e5;border-radius:14px;padding:18px}.tarjeta h3{margin:0 0 8px}.idea{display:block;margin-top:10px;padding:10px 12px;background:#f6ead5;border-radius:10px;color:#634d1d}.tabla-wrap{overflow-x:auto}.tabla{width:100%;border-collapse:collapse;min-width:680px}.tabla th,.tabla td{padding:12px;text-align:left;border-bottom:1px solid #dbe7e5;vertical-align:top}.tabla th{background:#eaf3f5;color:#1e5264}.herramientas{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}.boton{display:inline-block;background:#2e8b57;color:#fff;text-decoration:none;border:0;border-radius:10px;padding:12px 16px;font-weight:bold;cursor:pointer;font-size:15px}.boton:hover{filter:brightness(.95)}.boton-morado{background:#76518f}.boton-secundario{background:#1e6f8b}.volver{display:inline-block;margin-top:18px;color:#1e6f8b;text-decoration:none;font-weight:bold}.nota{background:#fff8e7;border-left:5px solid #d39a2b;border-radius:9px;padding:13px 16px;margin:16px 0}.quiz{background:#f8faf9;border:2px solid #dbe7e5;border-radius:16px;padding:20px}.pregunta{border:0;border-bottom:1px solid #dbe7e5;padding:15px 0;margin:0}.pregunta legend{font-weight:bold;padding:0 0 8px}.opcion{display:block;margin:8px 0;padding:8px 10px;background:#fff;border-radius:8px;cursor:pointer}.opcion input{margin-right:8px}.retro{display:none;padding:9px 11px;border-radius:8px;margin-top:9px}.retro.correcta{display:block;background:#e3f4e8;color:#205f35}.retro.incorrecta{display:block;background:#fff0ed;color:#8b3427}.resumen-quiz{font-weight:bold;margin:14px 0 0;color:#1e6f8b;min-height:24px}.organo-botones{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.organo-botones button{border:2px solid #dbe7e5;border-radius:12px;background:#fff;padding:12px 8px;color:#243238;font-weight:bold;cursor:pointer}.organo-botones button.activo{border-color:#d39a2b;background:#fff8e7}.detalle-organo{margin-top:15px;min-height:130px}.caso{border-left:5px solid #d39a2b}.etapa{padding:13px 15px;border:1px solid #dbe7e5;border-radius:12px;margin:10px 0;background:#f8faf9}.etapa summary{font-weight:bold;color:#1e6f8b;cursor:pointer}.pie{margin-top:28px;padding-top:14px;border-top:1px solid #dbe7e5;color:#59676b;font-size:14px}.ayuda-progreso{font-size:14px;color:#5b686b}@media(max-width:720px){.contenedor{padding:22px 13px 40px}.seccion{padding:20px 16px}.rejilla{grid-template-columns:1fr}.organo-botones{grid-template-columns:repeat(2,minmax(0,1fr))}.tabla{min-width:600px}}
+</style>
+</head>
+<body>
+<main class="contenedor">
+<header class="encabezado"><span class="etiqueta">Ruta de aprendizaje · Ayuno</span><h1>🧑‍⚕️ Paciente virtual</h1><p>Integra señales hormonales, producción de combustibles e intercambio entre órganos en un caso hipotético de ayuno.</p></header>
+
+<section class="seccion"><h2>Historia del caso</h2><p>Para esta actividad, considera a una persona adulta sana que participa en un ejercicio de razonamiento metabólico. No se trata de una consulta médica.</p>
+<details class="etapa"><summary>Pista 1 · Contexto</summary><p>La persona lleva aproximadamente 30 horas sin ingerir alimentos. No ha realizado ejercicio intenso.</p></details>
+<details class="etapa"><summary>Pista 2 · Señales hormonales</summary><p>La insulina es baja y la acción relativa del glucagón es mayor que en el estado alimentado.</p></details>
+<details class="etapa"><summary>Pista 3 · Combustibles circulantes</summary><p>El tejido adiposo ha liberado ácidos grasos y glicerol. La producción de cuerpos cetónicos está aumentando.</p></details>
+<details class="etapa"><summary>Pista 4 · Necesidad de glucosa</summary><p>La concentración de glucosa se mantiene mediante producción endógena. El eritrocito sigue dependiendo de glucosa y produce lactato.</p></details>
+<p class="nota"><strong>Tu tarea:</strong> integra las pistas para explicar el aporte de energía y la comunicación entre tejidos.</p>
+</section>
+<section class="seccion"><h2>Comprueba tu razonamiento</h2>
+<p>Selecciona una alternativa en cada pregunta y luego pulsa <strong>Comprobar respuestas</strong>. Para completar este módulo necesitas al menos <strong>5/6</strong>.</p>
+<div class="quiz" id="quiz">
+<fieldset class="pregunta" data-correcta="0" data-explicacion="El estado de ayuno se asocia a menor insulina y a predominio relativo de señales contrarreguladoras."><legend>1. ¿Qué perfil hormonal esperas en esta situación?</legend>
+<label class="opcion"><input type="radio" name="q1" value="0"> Insulina baja y mayor acción relativa del glucagón</label>
+<label class="opcion"><input type="radio" name="q1" value="1"> Insulina alta y glucagón suprimido</label>
+<label class="opcion"><input type="radio" name="q1" value="2"> Ausencia completa de glucagón e insulina</label>
+<div class="retro" aria-live="polite"></div></fieldset>
+<fieldset class="pregunta" data-correcta="0" data-explicacion="La gluconeogénesis hepática sostiene la producción endógena de glucosa; el aporte renal aumenta en ayuno más prolongado."><legend>2. ¿Qué proceso ayuda a mantener la glucosa sanguínea cuando el glucógeno hepático ha disminuido?</legend>
+<label class="opcion"><input type="radio" name="q2" value="0"> Gluconeogénesis hepática; el riñón también puede contribuir</label>
+<label class="opcion"><input type="radio" name="q2" value="1"> Captación intestinal de glucosa</label>
+<label class="opcion"><input type="radio" name="q2" value="2"> Síntesis de glucógeno muscular y exportación de glucosa</label>
+<div class="retro" aria-live="polite"></div></fieldset>
+<fieldset class="pregunta" data-correcta="0" data-explicacion="El glicerol puede convertirse en intermediarios gluconeogénicos. La oxidación de ácidos grasos de cadena par no produce glucosa neta."><legend>3. ¿Qué producto de la lipólisis puede aportar carbonos a la gluconeogénesis?</legend>
+<label class="opcion"><input type="radio" name="q3" value="0"> Glicerol</label>
+<label class="opcion"><input type="radio" name="q3" value="1"> Ácido palmítico convertido directamente en glucosa</label>
+<label class="opcion"><input type="radio" name="q3" value="2"> Acetoacetato</label>
+<div class="retro" aria-live="polite"></div></fieldset>
+<fieldset class="pregunta" data-correcta="0" data-explicacion="El eritrocito no tiene mitocondrias; obtiene ATP mediante glucólisis y produce lactato."><legend>4. ¿Cómo obtiene ATP el eritrocito en este caso?</legend>
+<label class="opcion"><input type="radio" name="q4" value="0"> Por glucólisis de glucosa, con producción de lactato</label>
+<label class="opcion"><input type="radio" name="q4" value="1"> Por β-oxidación mitocondrial</label>
+<label class="opcion"><input type="radio" name="q4" value="2"> Por oxidación de cuerpos cetónicos en el ciclo de Krebs</label>
+<div class="retro" aria-live="polite"></div></fieldset>
+<fieldset class="pregunta" data-correcta="0" data-explicacion="En el hígado, el acetil-CoA derivado de ácidos grasos puede destinarse a cetogénesis; no genera glucosa neta."><legend>5. ¿Qué destino es coherente para el acetil-CoA generado por β-oxidación en el hígado durante el ayuno?</legend>
+<label class="opcion"><input type="radio" name="q5" value="0"> Puede utilizarse para formar cuerpos cetónicos</label>
+<label class="opcion"><input type="radio" name="q5" value="1"> Se transforma directamente en glucosa neta</label>
+<label class="opcion"><input type="radio" name="q5" value="2"> Se convierte en lactato para que el eritrocito lo oxide</label>
+<div class="retro" aria-live="polite"></div></fieldset>
+<fieldset class="pregunta" data-correcta="0" data-explicacion="La utilización cerebral de cuerpos cetónicos aumenta con la adaptación al ayuno, pero la necesidad de glucosa no desaparece."><legend>6. ¿Qué cambio de combustible puede ocurrir en el cerebro si el ayuno se prolonga?</legend>
+<label class="opcion"><input type="radio" name="q6" value="0"> Aumenta el uso de cuerpos cetónicos, aunque continúa cierta dependencia de glucosa</label>
+<label class="opcion"><input type="radio" name="q6" value="1"> El cerebro utiliza exclusivamente ácidos grasos de cadena larga</label>
+<label class="opcion"><input type="radio" name="q6" value="2"> El cerebro deja de necesitar ATP</label>
+<div class="retro" aria-live="polite"></div></fieldset>
+<button class="boton boton-morado" id="comprobar" type="button">Comprobar respuestas</button><p class="resumen-quiz" id="resumen-quiz" aria-live="polite"></p></div></section>
+<p class="ayuda-progreso">El progreso se registra en este navegador cuando se alcanza el puntaje mínimo.</p>
+<a class="volver" href="menu-ayuno.html">← Volver a la ruta de Ayuno</a>
+<footer class="pie">Academia de Metabolismo · Material educativo</footer>
+</main>
+<script>
+const MODULO = "paciente";
+const PUNTAJE_MINIMO = 5;
+const TOTAL = 6;
+function guardarLogro(puntaje){
+  try{
+    localStorage.setItem("academiaAyuno_" + MODULO, JSON.stringify({completo:true,puntaje:puntaje,total:TOTAL,fecha:new Date().toISOString()}));
+    return true;
+  }catch(e){ return false; }
+}
+document.getElementById("comprobar").addEventListener("click", function(){
+  const preguntas = Array.from(document.querySelectorAll(".pregunta"));
+  let puntaje = 0, faltan = false;
+  preguntas.forEach(function(p){
+    const seleccion = p.querySelector("input:checked");
+    const retro = p.querySelector(".retro");
+    if(!seleccion){
+      faltan = true;
+      retro.className = "retro incorrecta";
+      retro.textContent = "Selecciona una alternativa para revisar esta pregunta.";
+      return;
+    }
+    const correcta = Number(seleccion.value) === Number(p.dataset.correcta);
+    if(correcta) puntaje++;
+    retro.className = "retro " + (correcta ? "correcta" : "incorrecta");
+    retro.textContent = (correcta ? "✓ Correcto. " : "Revisa esta idea. ") + p.dataset.explicacion;
+  });
+  const resumen = document.getElementById("resumen-quiz");
+  if(faltan){
+    resumen.textContent = "Respondiste " + puntaje + " de " + TOTAL + ". Completa las preguntas pendientes y vuelve a comprobar.";
+    return;
+  }
+  if(puntaje >= PUNTAJE_MINIMO){
+    const guardado = guardarLogro(puntaje);
+    resumen.textContent = "¡Módulo completado! Puntaje: " + puntaje + "/" + TOTAL + ". " + (guardado ? "El avance quedó registrado en este navegador." : "El navegador no permitió guardar el avance; conserva esta página abierta para revisar el resultado.");
+  }else{
+    resumen.textContent = "Puntaje: " + puntaje + "/" + TOTAL + ". Revisa la retroalimentación y vuelve a intentarlo. Necesitas " + PUNTAJE_MINIMO + " respuestas correctas.";
+  }
+});
+</script>
+</body>
+</html>
